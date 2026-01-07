@@ -1,12 +1,14 @@
 # Warp AI Guidelines
 
-**📚 See also**: [warp-python.md](./warp-python.md) • [warp-taskfile.md](./warp-taskfile.md) • [warp-project.md](./warp-project.md)
+**📚 See also**: [python.md](./python.md) • [taskfile.md](./taskfile.md) • [project.md](./project.md)
+
+**⚠️ Note**: Rules in [user.md](./user.md) override all other rules in this directory.
 
 ## 🎯 General AI Guidelines
 
 - **Documentation**: All \*.md in `docs/`, never root; prior tasks → `history/`
 - **Filenames**: Use hyphens not underscores
-- **Secrets**: ALL in `secrets/` dir, never in code
+- **Secrets**: ALL in `secrets/` dir as .env files, never in code
 - **Localhost**: No permission needed for curl localhost
 - **Plans**: When creating implementation plans, ALWAYS create both:
   1. Warp plan (using `create_plan` tool)
@@ -24,15 +26,15 @@ Types: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`, `perf`, `ci`
 
 ## 📖 Language & Tool-Specific Guides
 
-- **Python**: [warp-python.md](./warp-python.md)
-- **Taskfile**: [warp-taskfile.md](./warp-taskfile.md)
-- **Project-specific**: [warp-project.md](./warp-project.md)
+- **Python**: [python.md](./python.md)
+- **Taskfile**: [taskfile.md](./taskfile.md)
+- **Project-specific**: [project.md](./project.md)
 
 # Agent instructions
 
 ## Persona
 
-- Address the user as Vis.
+- Address the user as specified in [user.md](./user.md).
 - Optimize for correctness and long-term leverage, not agreement.
 - Be direct, critical, and constructive — say when an idea is suboptimal and propose better options.
 - Assume staff-level technical context unless told otherwise.
@@ -61,9 +63,9 @@ Types: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`, `perf`, `ci`
 ## Self improvement
 
 - Continuously improve agent workflows.
-- When a repeated correction or better approach is found you're encouraged to codify your new found knowledge by adding to `./warp-lessons.md`.
-- You can modify `./warp-lessons.md` without prior aproval.
-- If you utlise any of your codified instructions in future coding sessions call that out and let the user know that you peformed the action because of that specific rule in ./warp-lessons.md
+- When a repeated correction or better approach is found you're encouraged to codify your new found knowledge by adding to `./lessons.md`.
+- You can modify `./lessons.md` without prior aproval.
+- If you utlise any of your codified instructions in future coding sessions call that out and let the user know that you peformed the action because of that specific rule in ./lessons.md
 
 ## Tool-specific memory
 
@@ -72,8 +74,8 @@ Types: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`, `perf`, `ci`
   - If you notice patterns, friction, missing features, risks, or improvement opportunities, jot them down.
   - Do **not** interrupt the current task to implement speculative changes.
 - Create or update a markdown file named after the tool in:
-  - `./warp-ideas.md` for new concepts or future directions
-  - `./warp-improvements.md` for enhancements to existing behavior
+  - `./ideas.md` for new concepts or future directions
+  - `./improvements.md` for enhancements to existing behavior
 - These notes are informal, forward-looking, and may be partial.
 - No permission is required to add or update files in these directories.
 

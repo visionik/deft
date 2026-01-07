@@ -1,157 +1,307 @@
-# Warping
+# Warping Process
 
-> Best practices and guidelines for working with Warp and other Agentic Development Environments
+**A layered framework for AI-assisted development with consistent standards and workflows.**
 
-A curated collection of markdown guidelines that codify best practices for AI agents when writing, building, testing, and managing software projects. Originally designed for [Warp](https://www.warp.dev/), these standards are applicable to any agentic development environment.
+## 🎯 What is Warping?
 
-## 🎯 What is this?
+Warping is a structured approach to working with AI coding assistants (particularly Warp AI) that provides:
 
-Warping is a framework of reusable, modular instructions that teach AI agents how to work effectively on your projects. Rather than repeatedly explaining conventions or debugging agent mistakes, you encode your standards once and reference them across projects.
+- **Consistent coding standards** across languages and projects
+- **Reproducible workflows** via task-based automation
+- **Self-improving guidelines** that evolve with your team
+- **Hierarchical rule precedence** from general to project-specific
 
-## 🚀 Benefits
+## 📚 The Layers
 
-- **Consistency**: Agents follow the same standards across all your projects
-- **Quality**: Built-in best practices for testing, coverage, formatting, and code quality
-- **Safety**: Guidelines for production safety, source control, and secrets management
-- **Efficiency**: Agents know your preferred tools, patterns, and workflows upfront
-- **Self-improvement**: Agents can learn from mistakes and codify new knowledge
-- **Language-agnostic**: Separate guidelines for Python, Go, and other languages/tools
+Warping uses a layered architecture where more specific rules override general ones:
 
-## 📚 Files Overview
+```
+user.md          ← Highest precedence (personal preferences)
+  ↓
+project.md       ← Project-specific rules and workflows
+  ↓
+python.md        ← Language-specific standards
+go.md
+  ↓
+taskfile.md      ← Tool-specific guidelines
+  ↓
+main.md          ← General AI guidelines and agent behavior
+  ↓
+specification.md ← Lowest precedence (project requirements)
+```
 
-### Core Guidelines
+### 🔧 Core Files
 
-- **`warp.md`** - Main entry point with general AI guidelines covering:
-  - Documentation structure and file organization
-  - Code search (ripgrep, ast-grep)
-  - Commit conventions (Conventional Commits)
-  - Agent persona and quality standards
-  - SCM and production safety rules
-  - Self-improvement mechanisms
+#### **main.md** - Foundation
+The central AI guidelines document defining:
+- General workflow standards (documentation, filenames, secrets)
+- Agent persona and behavior
+- Quality requirements and safety rules
+- Self-improvement mechanisms
 
-### Language-Specific Standards
+**Start here** to understand core principles.
 
-- **`warp-python.md`** - Python development standards:
+#### **user.md** - Your Preferences
+Personal overrides for any rule in the system:
+- How to address you
+- Personal workflow preferences
+- Custom rules that supersede all others
 
-  - Stack: Python 3.11+, pytest, Flask/FastAPI, typer, textual
-  - Testing: pytest with ≥75% coverage requirement
-  - Style: PEP 8 via ruff, black, isort
-  - Types: PEP 484 with mypy strict mode
-  - Complete pyproject.toml configuration
+**Customize this** to make warping yours.
 
-- **`warp-go.md`** - Go development standards:
-  - Documentation: go.dev/doc/comment conventions
-  - Testing: Testify with ≥75% coverage
-  - Table-driven test patterns
-  - HTTP testing with httptest
-  - Quality checks and workflow
+### 🐍 Language Layers
 
-### Tool-Specific Guides
+#### **python.md**
+Python-specific standards:
+- Testing: pytest, ≥75% coverage
+- Style: ruff, black, isort (PEP 8)
+- Types: mypy strict mode
+- Docs: PEP 257 docstrings
 
-- **`warp-taskfile.md`** - [Task](https://taskfile.dev) best practices:
-  - Task-centric workflow philosophy
-  - Naming conventions and structure
-  - Dependencies, caching, and performance
-  - Robustness patterns (errexit, nounset, pipefail)
-  - UX considerations for teams and CI
+#### **go.md**
+Go-specific standards:
+- Testing: Testify, ≥75% coverage
+- Docs: go.dev/doc/comment
+- Patterns: table-driven tests, interface design
 
-### Project Configuration
+### 🎛️ Tool Layers
 
-- **`warp-project.md`** - Project-specific guidelines template:
+#### **taskfile.md**
+Taskfile best practices:
+- Task-centric workflows
+- Composable, documented tasks
+- Caching and incremental builds
+- Shell robustness patterns
 
-  - Workflow commands
-  - Secrets management
-  - Standards enforcement
-  - Example: OuraCLI configuration
+### 📦 Project Layer
 
-- **`warp-specification.md`** - Project specification template:
-  - Overview and dependencies
-  - Features and requirements
-  - Implementation notes
-  - Example: OuraCLI spec
+#### **project.md**
+Project-specific overrides:
+- Tech stack (CLI/Web/TUI)
+- Project workflows and commands
+- Secrets management
+- Coverage requirements
 
-### Agent Memory
+#### **specification.md**
+Links to detailed project specifications.
 
-- **`warp-ideas.md`** - Placeholder for new concepts and future directions
-- **`warp-lessons.md`** - Agent-learned knowledge from corrections and improvements
-- **`warp-suggestions.md`** - Agent suggestions for project improvements
+### 🧠 Learning & Memory
 
-## 🔧 Usage
+#### **lessons.md**
+Codified learnings from repeated corrections. The AI can update this autonomously when discovering better approaches.
 
-### For Warp Users
+#### **ideas.md**
+New concepts and future directions noticed during development.
 
-1. Copy relevant markdown files to your project's `docs/` directory
-2. Reference them in your project's `WARP.md` or `AGENTS.md` file:
-   ```markdown
-   See [docs/warp.md](./docs/warp.md) for AI agent guidelines
-   ```
-3. Customize the guidelines for your specific project needs
-4. Agents will automatically use these as context when working on your code
+#### **suggestions.md**
+AI-generated improvement suggestions for your projects.
 
-### For Other Agentic Environments
+## 🚀 Getting Started
 
-These guidelines work with any AI development environment that supports:
+### 1. Set Up Your User Preferences
 
-- Reading markdown documentation as context
-- Following codified instructions and best practices
-- Persisting learned knowledge
+Edit `user.md` to configure personal preferences:
 
-Simply reference the appropriate files in your agent's context or system prompts.
+```markdown
+# User Preferences
 
-### Modular Approach
+## Name
+Address the user as: **YourName**
 
-Each file is standalone and references related files. You can:
+## Custom Rules
+- Your custom preferences here
+```
 
-- Use `warp.md` alone for general guidelines
-- Add `warp-python.md` for Python projects
-- Add `warp-go.md` for Go projects
-- Add `warp-taskfile.md` if using Task for builds
-- Create custom `warp-project.md` for specific needs
+### 2. Understand the Hierarchy
 
-## 📖 Key Concepts
+Rules cascade with precedence:
+1. **user.md** (highest) - your personal overrides
+2. **project.md** - project-specific rules
+3. **Language files** (python.md, go.md) - language standards
+4. **Tool files** (taskfile.md) - tool guidelines
+5. **main.md** - general AI behavior
+6. **specification.md** (lowest) - requirements
 
-### Quality Standards
+### 3. Reference in Warp
 
-- Files SHOULD be <500 lines, MUST be <1000 lines
+Upload these files to **Warp Drive** so they're available to AI sessions:
+
+1. Open Warp
+2. Access Warp Drive (notebooks feature)
+3. Upload relevant warping/*.md files
+4. Reference them in your Warp rules/agent instructions
+
+### 4. Use in Projects
+
+For each project:
+
+1. Copy or link the warping directory
+2. Create/update `project.md` with project-specific rules
+3. Create/update `specification.md` or link to specs
+4. Let the AI reference these during development
+
+### 5. Evolve Over Time
+
+The warping process improves continuously:
+
+- AI updates `lessons.md` when learning better patterns
+- AI notes ideas in `ideas.md` for future consideration
+- AI suggests improvements in `suggestions.md`
+- You update `user.md` with new preferences
+- You update language/tool files as standards evolve
+
+## 💡 Key Principles
+
+### Task-Centric Workflow with Taskfile
+
+**Why Taskfile?**
+
+Warping uses [Taskfile](https://taskfile.dev) as the universal task runner for several reasons:
+
+1. **Makefiles are outdated**: Make syntax is arcane, portability is poor, and tabs vs spaces causes constant friction
+2. **Polyglot simplicity**: When working across Python (make/invoke/poetry scripts), Go (make/mage), Node (npm scripts/gulp), etc., each ecosystem has different conventions. Taskfile provides one consistent interface
+3. **Better than script sprawl**: A `/scripts` directory with dozens of bash files becomes chaotic—hard to discover, hard to document, hard to compose. Taskfile provides discoverability (`task --list`), documentation (`desc`), and composition (`deps`)
+4. **Modern features**: Built-in file watching, incremental builds via checksums, proper error handling, variable templating, and cross-platform support
+
+**Usage:**
+```bash
+task --list        # See available tasks
+task check         # Pre-commit checks
+task test:coverage # Run coverage
+task dev           # Start dev environment
+```
+
+### Test-Driven Development (TDD)
+
+Warping embraces TDD as the default development approach:
+
+1. **Write the test first**: Define expected behavior before implementation
+2. **Watch it fail**: Confirm the test fails for the right reason
+3. **Implement**: Write minimal code to make the test pass
+4. **Refactor**: Improve code quality while keeping tests green
+5. **Repeat**: Build features incrementally with confidence
+
+**Benefits:**
+- Tests become specifications of behavior
+- Better API design (you use the API before implementing it)
+- High coverage naturally (≥75% is easy when tests come first)
+- Refactoring confidence
+- Living documentation
+
+**In Practice:**
+```bash
+task test          # Run tests in watch mode during development
+task test:coverage # Verify ≥75% coverage
+task check         # Pre-commit: all quality checks including tests
+```
+
+### Quality First
 - ≥75% test coverage (overall + per-module)
-- Run all checks (fmt, lint, type, test) before commits
-- Never claim checks passed without actually running them
+- Always run `task check` before commits
+- Run linting, formatting, type checking
+- Never claim checks passed without running them
 
-### Safety Principles
+### Spec-Driven Development (SDD)
 
-- Never use `git reset --hard` or force-push without permission
-- Assume production impact unless stated otherwise
-- All secrets in `secrets/` directory, never in code
+Before writing any code, warping uses an AI-assisted specification process:
+
+**The Process:**
+
+1. **Start with make-spec.md**: A prompt template for creating specifications
+   ```markdown
+   I want to build ________ that has the following features:
+   1. Feature A
+   2. Feature B
+   3. Feature C
+   ```
+
+2. **AI Interview**: The AI (Claude or similar) asks focused, non-trivial questions to clarify:
+   - Missing decisions and edge cases
+   - Implementation details and architecture
+   - UX considerations and constraints
+   - Dependencies and tradeoffs
+   
+   Each question includes numbered options and an "other" choice for custom responses.
+
+3. **Generate SPECIFICATION.md**: Once ambiguity is minimized, the AI produces a comprehensive spec with:
+   - Clear phases, subphases, and tasks
+   - Dependency mappings (what blocks what)
+   - Parallel work opportunities
+   - No code—just the complete plan
+
+4. **Multi-Agent Development**: The spec enables multiple AI coding agents to work in parallel on independent tasks
+
+**Why SDD?**
+- **Clarity before coding**: Catch design issues early
+- **Parallelization**: Clear dependencies enable concurrent work
+- **Scope management**: Complete spec prevents scope creep
+- **Onboarding**: New contributors/agents understand the full picture
+- **AI-friendly**: Structured specs help AI agents stay aligned
+
+**Example**: See `make-spec.md` template in Warp Drive for the interview process
+
+### Convention Over Configuration
+- Use Conventional Commits for all commits
+- Use hyphens in filenames, not underscores
+- Keep secrets in `secrets/` directory
+- Keep docs in `docs/`, not project root
+
+### Safety and Reversibility
+- Never force-push without permission
+- Assume production impact unless stated
 - Prefer small, reversible changes
+- Call out risks explicitly
 
-### Self-Improvement
+## 📖 Example Workflows
 
-- Agents can modify `warp-lessons.md` to codify learnings
-- Agents document observations in `warp-ideas.md` and `warp-suggestions.md`
-- No permission required to update memory files
+### Starting a New Python Project
 
-### Conventional Commits
+1. AI reads: `main.md` → `python.md` → `taskfile.md`
+2. AI sets up: pytest, ruff, black, mypy, Taskfile
+3. AI configures: ≥75% coverage, PEP standards
+4. You customize: `project.md` with project specifics
 
-All guidelines enforce [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/):
+### Working on an Existing Go Project
 
-```
-type(scope): description
+1. AI reads: `user.md` → `project.md` → `go.md` → `main.md`
+2. AI follows: go.dev/doc/comment, Testify patterns
+3. AI runs: `task check` before suggesting changes
+4. AI respects: your user.md overrides
 
-Types: feat, fix, docs, style, refactor, test, chore, perf, ci, build, revert
-```
+### Code Review Session
 
-## 🤝 Contributing
+1. AI references quality standards from language file
+2. AI runs `task quality` and `task test:coverage`
+3. AI checks Conventional Commits compliance
+4. AI suggests improvements → adds to `suggestions.md`
 
-This is a living framework. As you discover better patterns or encounter new scenarios:
+## 🔗 Integration with Warp AI
 
-1. Update the relevant markdown file
-2. If agents discover improvements, they'll add to `warp-lessons.md`
-3. Consider contributing back patterns that work well
+The warping process is designed for Warp AI's rule system:
 
-## 📄 License
+1. **Upload to Warp Drive**: Keep main.md and relevant files in Warp Drive
+2. **Create Warp Rules**: Reference warping files in your Warp rules
+3. **Project-Specific Rules**: Add `AGENTS.md` or `WARP.md` in project root that references warping
+4. **Automatic Context**: Warp AI loads rules automatically when working in your projects
 
-Copyright 2025 Jonathan Taylor. If you've been invited to this repo you have permission to use this work.
+## 📝 Contributing to Warping
+
+As you use warping:
+
+1. **lessons.md**: AI adds patterns discovered during development
+2. **ideas.md**: AI notes potential improvements
+3. **suggestions.md**: AI records project-specific suggestions
+4. Review these periodically and promote good ideas to main guidelines
+
+## 🎓 Philosophy
+
+Warping embodies:
+
+- **Correctness over convenience**: Optimize for long-term quality
+- **Standards over flexibility**: Consistent patterns across projects
+- **Evolution over perfection**: Continuously improve through learning
+- **Clarity over cleverness**: Direct, explicit, maintainable code
 
 ---
 
-**Note**: While designed for Warp, these standards promote universal software engineering best practices applicable to any development workflow.
+**Next Steps**: Read [main.md](./main.md) for comprehensive AI guidelines, then customize [user.md](./user.md) with your preferences.

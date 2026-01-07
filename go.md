@@ -1,6 +1,6 @@
 # Go Standards
 
-**⚠️ Generic: [warp.md](./warp.md) | Project: [warp-project.md](./warp-project.md)**
+**⚠️ Generic: [warp.md](./warp.md) | Project: [project.md](./project.md)**
 
 ## 📋 Standards
 

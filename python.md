@@ -1,6 +1,6 @@
 # Python Standards
 
-**⚠️ [warp.md](./warp.md) | [warp-project.md](./warp-project.md)**
+**⚠️ [warp.md](./warp.md) | [project.md](./project.md)**
 
 **Stack**: Python 3.11+, pytest; Web: Flask/FastAPI; CLI: typer[all]; TUI: textual[dev]
 
