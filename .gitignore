@@ -1,0 +1,26 @@
+# Distribution
+dist/
+
+# Backup files
+backup/
+
+# Node modules (if using markdown linting)
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.bak
+
+# User-specific files (users should copy from templates)
+core/user.md

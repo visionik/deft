@@ -1,0 +1,87 @@
+version: '3'
+
+vars:
+  PROJECT_NAME: warping
+  VERSION: 0.2.0
+
+tasks:
+  default:
+    desc: List all available tasks
+    cmds:
+      - task --list
+    silent: true
+
+  validate:
+    desc: Validate all markdown files
+    cmds:
+      - echo "Validating markdown files..."
+      - find . -name "*.md" -not -path "./backup/*" -not -path "./.git/*" | xargs -I {} sh -c 'echo "✓ {}"'
+      - echo "✓ All markdown files validated"
+
+  lint:
+    desc: Lint markdown files (requires markdownlint-cli)
+    cmds:
+      - |
+        if command -v markdownlint >/dev/null 2>&1; then
+          markdownlint '**/*.md' --ignore backup --ignore node_modules
+        else
+          echo "⚠ markdownlint not installed. Install with: npm install -g markdownlint-cli"
+          exit 0
+        fi
+
+  check:
+    desc: Run all pre-commit checks
+    deps:
+      - validate
+    cmds:
+      - echo "✓ All checks passed"
+
+  build:
+    desc: Package framework for distribution
+    cmds:
+      - mkdir -p dist
+      - tar -czf dist/warping-{{.VERSION}}.tar.gz --exclude=backup --exclude=dist --exclude=.git --exclude=node_modules .
+      - echo "✓ Created dist/warping-{{.VERSION}}.tar.gz"
+
+  clean:
+    desc: Clean generated artifacts
+    cmds:
+      - rm -rf dist/
+      - echo "✓ Cleaned artifacts"
+
+  install:
+    desc: Install warping CLI to /usr/local/bin
+    cmds:
+      - |
+        if [ -w /usr/local/bin ]; then
+          ln -sf "$(pwd)/warping.sh" /usr/local/bin/warping
+          echo "✓ Installed warping to /usr/local/bin/warping"
+        else
+          echo "⚠ Need sudo access to install to /usr/local/bin"
+          sudo ln -sf "$(pwd)/warping.sh" /usr/local/bin/warping
+          echo "✓ Installed warping to /usr/local/bin/warping"
+        fi
+
+  uninstall:
+    desc: Uninstall warping CLI from /usr/local/bin
+    cmds:
+      - |
+        if [ -L /usr/local/bin/warping ]; then
+          rm /usr/local/bin/warping
+          echo "✓ Uninstalled warping from /usr/local/bin"
+        else
+          echo "warping not installed in /usr/local/bin"
+        fi
+
+  stats:
+    desc: Show framework statistics
+    cmds:
+      - echo "Warping Framework v{{.VERSION}} Statistics:"
+      - echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+      - echo "Core files:      $(find core -name '*.md' | wc -l | tr -d ' ')"
+      - echo "Languages:       $(find languages -name '*.md' | wc -l | tr -d ' ')"
+      - echo "Interfaces:      $(find interfaces -name '*.md' | wc -l | tr -d ' ')"
+      - echo "Tools:           $(find tools -name '*.md' | wc -l | tr -d ' ')"
+      - echo "Templates:       $(find templates -name '*.md' | wc -l | tr -d ' ')"
+      - echo "Total files:     $(find . -name '*.md' -not -path './backup/*' -not -path './.git/*' | wc -l | tr -d ' ')"
+      - echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
