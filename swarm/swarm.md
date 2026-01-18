@@ -177,7 +177,7 @@ new_state = state.model_copy(deep=True, update={'status': 'completed'})
 ## Testing in Swarm Context
 
 **Test Ownership:**
-- ! Agent modifying code MUST update/add tests
+- ! Agent modifying code updates/adds tests
 - ! Run relevant test suite before marking task complete
 - ! Document test coverage for changed code
 
@@ -187,7 +187,7 @@ new_state = state.model_copy(deep=True, update={'status': 'completed'})
 - ! Don't merge if integration tests fail
 
 **Test Isolation:**
-- ! Tests MUST be independently runnable
+- ! Tests are independently runnable
 - ! No shared mutable state between tests
 - ! Use fixtures/factories for test data
 
