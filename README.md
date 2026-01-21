@@ -2,6 +2,8 @@
 
 **A layered framework for AI-assisted development with consistent standards and workflows.**
 
+Copyright © 2025-2026 Jonathan Taylor (visionik@pobox.com). See [LICENSE.md](./LICENSE.md) for usage terms.
+
 ## 🎯 What is Warping?
 
 Warping is a structured approach to working with AI coding assistants (particularly Warp AI) that provides:
