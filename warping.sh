@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# warping.sh - CLI tool for Warping framework v0.2.0
+# warping.sh - CLI tool for Warping framework v0.2.3
 # A layered framework for AI-assisted development
 
-VERSION="0.2.0"
+VERSION="0.2.3"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Colors for output
