@@ -338,12 +338,16 @@ $(echo -e "$feature_list")
 ${template_content}
 EOF
     
+    local full_path="$(pwd)/${prd_file}"
     success "Created PRD.md at ${prd_file}"
     info "Next steps:"
-    info "  1. Open your AI assistant (Claude, Warp AI, etc.)"
-    info "  2. Share PRD.md with your AI"
+    info "  1. Open your AI assistant (Claude, Warp.dev, etc.)"
+    info "  2. Ask your AI to read and run ${full_path}"
     info "  3. The AI will conduct a detailed interview based on the template"
     info "  4. AI will generate the final SPECIFICATION.md"
+    info "  5. You can review the SPECIFICATION.md if you want"
+    info "  6. Ask your AI to implement $(pwd)/SPECIFICATION.md"
+    info "  7. Your AI may ask you some questions like 'should I continue', just say yes or please continue"
 }
 
 # Init command - initialize warping in a project
