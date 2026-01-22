@@ -5,6 +5,36 @@ All notable changes to the Warping framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.4] - 2026-01-22
+
+### Added
+- **AgentSkills Integration**: Added `SKILL.md` for Claude Code and clawd.bot compatibility
+  - Follows AgentSkills specification for universal AI assistant compatibility
+  - Auto-invokes when working in warping projects or mentioning warping standards
+  - Teaches AI assistants about rule precedence, lazy loading, TDD, SDD, and quality standards
+  - Includes comprehensive "New Project Workflow" section with step-by-step guidance
+  - Documents complete SDD process: PRD → AI Interview → Specification → Implementation
+  - Compatible with both Claude Code (IDE) and clawd.bot (messaging platforms)
+- **clawd.bot Support**: Added clawd.bot-specific metadata to SKILL.md
+  - Requires `task` binary (specified in metadata)
+  - Supports macOS and Linux platforms
+  - Homepage reference to GitHub repository
+  - Installation paths for shared and per-agent skills
+- **Integration Documentation**: Created `docs/claude-code-integration.md` (renamed to include clawd.bot)
+  - Installation instructions for both Claude Code and clawd.bot
+  - Usage examples across IDE and messaging platforms
+  - Publishing guidance for Skills Marketplace and ClawdHub
+  - Multi-agent setup documentation
+  - Cross-platform benefits and compatibility notes
+
+### Changed
+- **SKILL.md Structure**: Enhanced with detailed workflow sections
+  - Step-by-step initialization workflow (init → bootstrap → project → spec)
+  - Conditional logic for first-time user setup
+  - Complete SDD workflow documentation with user review gates
+  - Context-aware workflows for new projects vs existing projects vs new features
+  - Integration notes expanded to cover multiple AI platforms
+
 ## [0.2.3] - 2026-01-22
 
 ### Added
