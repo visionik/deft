@@ -95,10 +95,12 @@ Warping embraces TDD by default:
 
 For new features or projects:
 
-1. **Start with PRD.md** - Run `warping.sh spec` to create Product Requirements Document
+1. **Build PRD.md** - Run `warping.sh spec` to create Product Requirements Document
 2. **AI Interview** - Answer focused questions to clarify requirements
-3. **Generate SPECIFICATION.md** - Complete spec with phases, dependencies, and tasks
-4. **Implement** - Build according to spec
+3. **PRD.md Review** - Let user review/change PRD.md if they want
+4. **Generate SPECIFICATION.md** - use PRD.md + Warping rules to build a complete spec with phases, dependencies, and tasks
+5. **SPECIFICATION.md review** -- Let user review/change SPECIFICATION.md if they want
+5. **Implement** - Build according to spec, following all applicable warping rules
 
 ## Quality Standards
 
@@ -160,28 +162,106 @@ refactor: code restructuring
 - Standard: C++20/23
 - Style: clang-format, clang-tidy
 
-## Project Initialization
+## New Project Workflow
 
-### For New Projects
+When user says "start a new project with warping", "use warping to build X", or similar, follow this complete workflow:
+
+### Step 1: Initialize Warping Structure
 ```bash
-# Initialize warping
-warping.sh init
+./warping.sh init
+```
+- Creates `./warping/` directory with framework files
+- Sets up `secrets/` directory
+- Creates basic `Taskfile.yml`
+- Adds `.gitignore` for secrets
 
-# Set up user preferences (first time only)
-warping.sh bootstrap
+### Step 2: User Configuration (First Time Only)
+Check if `./warping/core/user.md` exists. If not:
+```bash
+./warping.sh bootstrap
+```
+- Prompts for user name
+- Sets default coverage threshold
+- Configures primary languages
+- Creates personalized `user.md`
 
-# Configure project
-warping.sh project
+### Step 3: Project Configuration
+```bash
+./warping.sh project
+```
+- Prompts for project name
+- Selects project type (CLI, TUI, REST API, Web App, Library, Other)
+- Chooses primary language
+- Sets coverage threshold
+- Creates `project.md` with standards
 
-# Generate specification (optional)
-warping.sh spec
+### Step 4: Specification-Driven Development
+```bash
+./warping.sh spec
 ```
 
-### For Existing Projects
+This launches the full SDD workflow:
+
+**a) Generate PRD.md**:
+- Prompts for project name, description, and initial features
+- Creates `PRD.md` with structured template
+- Displays full path to PRD.md
+
+**b) Conduct AI Interview**:
+- Read the PRD.md thoroughly
+- Ask focused, non-trivial questions to clarify:
+  - Missing decisions and edge cases
+  - Implementation details and architecture
+  - UX considerations and constraints  
+  - Dependencies and tradeoffs
+- Each question should have numbered options plus "other"
+- Continue until ambiguity is minimized
+
+**c) User Review of PRD**:
+- Let user review/edit PRD.md if they want
+- Wait for confirmation before proceeding
+
+**d) Generate SPECIFICATION.md**:
+- Use PRD.md + warping rules to create complete implementation spec
+- Include clear phases, subphases, and tasks
+- Map dependencies (what blocks what)
+- Identify parallel work opportunities
+- NO code in specification - just the plan
+
+**e) User Review of Specification**:
+- Let user review/edit SPECIFICATION.md if they want
+- Wait for confirmation before implementation
+
+**f) Begin Implementation**:
+- Follow the SPECIFICATION.md plan
+- Apply all warping rules (TDD, quality standards, task-centric)
+- Maintain ≥85% coverage
+- Run `task check` before each commit
+- Use Conventional Commits format
+
+### Step 5: Development Cycle
+- Write tests first (TDD)
+- Implement features incrementally
+- Run `task check` frequently
+- Commit with proper format
+- Push changes
+
+## Project Initialization (Quick Reference)
+
+### For New Projects (Full Workflow)
+Use the "New Project Workflow" above when starting from scratch.
+
+### For Existing Warping Projects
 1. Check for `./warping/` directory
-2. Read `main.md` for general guidelines
-3. Read `project.md` for project-specific rules
-4. Follow task-based workflows: `task --list`
+2. Read `./warping/main.md` for general guidelines
+3. Read `./warping/core/user.md` for user preferences
+4. Read `./warping/core/project.md` for project rules
+5. Run `task --list` to see available tasks
+
+### For New Features in Existing Projects
+1. Consider running `./warping.sh spec` for complex features
+2. Follow SDD process (PRD → Interview → Specification → Implement)
+3. Or for simple features, just follow TDD directly
 
 ## Self-Improvement Mechanism
 
