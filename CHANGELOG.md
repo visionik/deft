@@ -5,6 +5,52 @@ All notable changes to the Warping framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.5] - 2026-01-23
+
+### Added
+- **`wrun reset` command**: Reset configuration files to default/empty state
+  - Interactive mode: prompts for each file individually
+  - Batch mode (`--all`): resets all files without prompting
+  - Resets user.md to default template, deletes project.md/PRD.md/SPECIFICATION.md
+- **Guided workflow prompts**: Commands now chain together interactively
+  - `wrun install` asks to run `wrun project` after completion
+  - `wrun bootstrap` asks to run `wrun project` after completion (if in warping directory)
+  - `wrun project` asks to run `wrun spec` after completion
+  - Creates smooth guided flow: install → bootstrap → project → spec
+- **Enhanced command descriptions**: Each command now shows detailed explanation at startup
+  - `wrun install`: Shows what will be created (warping/, secrets/, docs/, Taskfile.yml, .gitignore)
+  - `wrun project`: Explains project.md purpose (tech stack, quality standards, workflow)
+  - `wrun spec`: Explains PRD.md creation and AI interview process
+- **Smart project name detection**: `wrun spec` reads project name from project.md
+  - Auto-suggests project name if project.md exists
+  - Falls back to manual input if not found
+- **Improved prompt_toolkit installation**: Better detection and instructions
+  - Shows exact Python interpreter path being used
+  - Detects externally-managed Python (PEP 668)
+  - Automatically includes `--break-system-packages` flag when needed
+  - Provides clear explanation and alternatives (venv, pipx)
+  - Links to PEP 668 documentation
+
+### Changed
+- **Renamed `wrun.py` → `wrun`**: Removed .py extension for cleaner command
+  - Follows Unix convention for executables
+  - More professional appearance
+  - All documentation updated
+- **Renamed `wrun init` → `wrun install`**: Better matches common tooling patterns
+  - Aligns with Makefile/Taskfile conventions (make install, task install)
+  - Clearer intent: "install warping framework"
+  - Less confusion with bootstrap command
+  - Updated all references: "initialized" → "installed", "Reinitialize" → "Reinstall"
+- **Updated README.md**: Added Quick Start section with wrun commands
+  - Shows complete workflow: install → bootstrap → project → spec
+  - Lists all available commands with descriptions
+
+### Fixed
+- **prompt_toolkit installation issues**: Python version mismatch detection
+  - Now uses `python -m pip` instead of bare `pip` command
+  - Ensures package installs for correct Python interpreter
+  - Prevents "module not found" errors when Python 3.x versions differ
+
 ## [0.2.4] - 2026-01-22
 
 ### Added
@@ -178,6 +224,8 @@ If you have custom scripts or references to warping files, update these paths:
 - Explore new interface guidelines if building CLIs, APIs, or UIs
 - Review enhanced language standards for Python, Go, TypeScript, and C++
 
+[0.2.5]: https://github.com/visionik/warping/releases/tag/v0.2.5
+[0.2.4]: https://github.com/visionik/warping/releases/tag/v0.2.4
 [0.2.3]: https://github.com/visionik/warping/releases/tag/v0.2.3
 [0.2.2]: https://github.com/visionik/warping/releases/tag/v0.2.2
 [0.2.1]: https://github.com/visionik/warping/releases/tag/v0.2.1

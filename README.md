@@ -140,9 +140,34 @@ warping-0.2.0/
 
 ## 🚀 Getting Started
 
+### Quick Start with `wrun`
+
+Warping includes a CLI tool (`wrun`) for setup and configuration:
+
+```bash
+# 1. Install warping in your project
+wrun install              # Creates ./warping/ directory structure
+
+# 2. Configure your personal preferences (run from warping directory)
+wrun bootstrap            # Creates user.md with your preferences
+
+# 3. Configure project settings
+wrun project              # Creates project.md with tech stack, standards
+
+# 4. Generate specification (optional)
+wrun spec                 # Creates PRD.md for AI-assisted spec interview
+
+# Other commands
+wrun reset                # Reset config files
+wrun validate             # Check warping configuration
+wrun doctor               # Check system dependencies
+```
+
+The commands flow naturally: **install → bootstrap → project → spec**
+
 ### 1. Set Up Your User Preferences
 
-Edit `user.md` to configure personal preferences:
+Or manually edit `user.md` to configure personal preferences:
 
 ```markdown
 # User Preferences
