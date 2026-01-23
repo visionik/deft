@@ -76,12 +76,13 @@ tasks:
   stats:
     desc: Show framework statistics
     cmds:
-      - echo "Warping Framework v{{.VERSION}} Statistics:"
-      - echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-      - echo "Core files:      $(find core -name '*.md' | wc -l | tr -d ' ')"
-      - echo "Languages:       $(find languages -name '*.md' | wc -l | tr -d ' ')"
-      - echo "Interfaces:      $(find interfaces -name '*.md' | wc -l | tr -d ' ')"
-      - echo "Tools:           $(find tools -name '*.md' | wc -l | tr -d ' ')"
-      - echo "Templates:       $(find templates -name '*.md' | wc -l | tr -d ' ')"
-      - echo "Total files:     $(find . -name '*.md' -not -path './backup/*' -not -path './.git/*' | wc -l | tr -d ' ')"
-      - echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+      - |
+        echo "Warping Framework v{{.VERSION}} Statistics:"
+        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        echo "Core files:      $(find core -name '*.md' | wc -l | tr -d ' ')"
+        echo "Languages:       $(find languages -name '*.md' | wc -l | tr -d ' ')"
+        echo "Interfaces:      $(find interfaces -name '*.md' | wc -l | tr -d ' ')"
+        echo "Tools:           $(find tools -name '*.md' | wc -l | tr -d ' ')"
+        echo "Templates:       $(find templates -name '*.md' | wc -l | tr -d ' ')"
+        echo "Total files:     $(find . -name '*.md' -not -path './backup/*' -not -path './.git/*' | wc -l | tr -d ' ')"
+        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
