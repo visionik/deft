@@ -1,6 +1,6 @@
 # Warp AI Guidelines
 
-Foundational guidelines for AI agent behavior in the Warping framework.
+Foundational guidelines for AI agent behavior in the Deft framework.
 
 Legend (from RFC2119): !=MUST, ~=SHOULD, ≉=SHOULD NOT, ⊗=MUST NOT, ?=MAY.
 
@@ -10,7 +10,7 @@ Legend (from RFC2119): !=MUST, ~=SHOULD, ≉=SHOULD NOT, ⊗=MUST NOT, ?=MAY.
 
 ## Overview
 
-**Warping** is a layered framework for AI-assisted work with consistent standards and workflows.
+**Deft** is a layered framework for AI-assisted work with consistent standards and workflows.
 
 **For coding tasks**: See [coding/coding.md](./coding/coding.md) for software development guidelines.
 

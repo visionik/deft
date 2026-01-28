@@ -205,7 +205,7 @@ Agent (to user):
 - [ ] Implement loop in Warp AI agent system
 - [ ] Add telemetry to measure effectiveness
 - [ ] Create user controls for Ralph behavior
-- [ ] Integrate with warping quality standards
+- [ ] Integrate with deft quality standards
 - [ ] Determine optimal max iteration count
 - [ ] Handle multi-file changes in loop
 - [ ] Define escalation UX patterns

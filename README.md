@@ -1,12 +1,12 @@
-# Warping Process
+# Deft Process
 
 **A layered framework for AI-assisted development with consistent standards and workflows.**
 
 Copyright © 2025-2026 Jonathan Taylor (visionik@pobox.com). See [LICENSE.md](./LICENSE.md) for usage terms.
 
-## 🎯 What is Warping?
+## 🎯 What is Deft?
 
-Warping is a structured approach to working with AI coding assistants (particularly Warp AI) that provides:
+Deft is a structured approach to working with AI coding assistants (particularly Warp AI) that provides:
 
 - **Consistent coding standards** across languages and projects
 - **Reproducible workflows** via task-based automation
@@ -16,7 +16,7 @@ Warping is a structured approach to working with AI coding assistants (particula
 
 ## 📝 Notation Legend
 
-Warping uses compact notation for requirements:
+Deft uses compact notation for requirements:
 
 - **!** = MUST (required, mandatory)
 - **~** = SHOULD (recommended, strong preference)
@@ -27,7 +27,7 @@ This notation appears in technical standard files (python.md, go.md, etc.) for s
 
 ## 📚 The Layers
 
-Warping uses a layered architecture where more specific rules override general ones:
+Deft uses a layered architecture where more specific rules override general ones:
 
 ```
 user.md          ← Highest precedence (personal preferences)
@@ -47,7 +47,7 @@ specification.md ← Lowest precedence (project requirements)
 ### 📁 Directory Structure
 
 ```
-warping-0.2.0/
+deft-0.2.0/
 ├── README.md              # This file
 ├── main.md                # Entry point - general AI guidelines
 │
@@ -140,27 +140,27 @@ warping-0.2.0/
 
 ## 🚀 Getting Started
 
-### Quick Start with `wrun`
+### Quick Start with `run`
 
-Warping includes a CLI tool (`wrun`) for setup and configuration:
+Deft includes a CLI tool (`run`) for setup and configuration:
 
 ```bash
-# 1. Install warping in your project
-wrun install              # Creates ./warping/ directory structure
+# 1. Install deft in your project
+run install              # Creates ./deft/ directory structure
 
-# 2. Configure your personal preferences (run from warping directory)
-wrun bootstrap            # Creates user.md with your preferences
+# 2. Configure your personal preferences (run from deft directory)
+run bootstrap            # Creates user.md with your preferences
 
 # 3. Configure project settings
-wrun project              # Creates project.md with tech stack, standards
+run project              # Creates project.md with tech stack, standards
 
 # 4. Generate specification (optional)
-wrun spec                 # Creates PRD.md for AI-assisted spec interview
+run spec                 # Creates PRD.md for AI-assisted spec interview
 
 # Other commands
-wrun reset                # Reset config files
-wrun validate             # Check warping configuration
-wrun doctor               # Check system dependencies
+run reset                # Reset config files
+run validate             # Check deft configuration
+run doctor               # Check system dependencies
 ```
 
 The commands flow naturally: **install → bootstrap → project → spec**
@@ -198,21 +198,21 @@ Upload these files to **Warp Drive** so they're available to AI sessions:
 
 1. Open Warp
 2. Access Warp Drive (notebooks feature)
-3. Upload relevant warping/\*.md files
+3. Upload relevant deft/\*.md files
 4. Reference them in your Warp rules/agent instructions
 
 ### 4. Use in Projects
 
 For each project:
 
-1. Copy or link the warping directory
+1. Copy or link the deft directory
 2. Create/update `project.md` with project-specific rules
 3. Create/update `specification.md` or link to specs
 4. Let the AI reference these during development
 
 ### 5. Evolve Over Time
 
-The warping process improves continuously:
+The deft process improves continuously:
 
 - AI updates `lessons.md` when learning better patterns
 - AI notes ideas in `ideas.md` for future consideration
@@ -226,7 +226,7 @@ The warping process improves continuously:
 
 **Why Taskfile?**
 
-Warping uses [Taskfile](https://taskfile.dev) as the universal task runner for several reasons:
+Deft uses [Taskfile](https://taskfile.dev) as the universal task runner for several reasons:
 
 1. **Makefiles are outdated**: Make syntax is arcane, portability is poor, and tabs vs spaces causes constant friction
 2. **Polyglot simplicity**: When working across Python (make/invoke/poetry scripts), Go (make/mage), Node (npm scripts/gulp), etc., each ecosystem has different conventions. Taskfile provides one consistent interface
@@ -244,7 +244,7 @@ task dev           # Start dev environment
 
 ### Test-Driven Development (TDD)
 
-Warping embraces TDD as the default development approach:
+Deft embraces TDD as the default development approach:
 
 1. **Write the test first**: Define expected behavior before implementation
 2. **Watch it fail**: Confirm the test fails for the right reason
@@ -277,7 +277,7 @@ task check         # Pre-commit: all quality checks including tests
 
 ### Spec-Driven Development (SDD)
 
-Before writing any code, warping uses an AI-assisted specification process:
+Before writing any code, deft uses an AI-assisted specification process:
 
 **The Process:**
 
@@ -356,16 +356,16 @@ Before writing any code, warping uses an AI-assisted specification process:
 
 ## 🔗 Integration with Warp AI
 
-The warping process is designed for Warp AI's rule system:
+The deft process is designed for Warp AI's rule system:
 
 1. **Upload to Warp Drive**: Keep main.md and relevant files in Warp Drive
-2. **Create Warp Rules**: Reference warping files in your Warp rules
-3. **Project-Specific Rules**: Add `AGENTS.md` or `WARP.md` in project root that references warping
+2. **Create Warp Rules**: Reference deft files in your Warp rules
+3. **Project-Specific Rules**: Add `AGENTS.md` or `WARP.md` in project root that references deft
 4. **Automatic Context**: Warp AI loads rules automatically when working in your projects
 
-## 📝 Contributing to Warping
+## 📝 Contributing to Deft
 
-As you use warping:
+As you use deft:
 
 1. **lessons.md**: AI adds patterns discovered during development
 2. **ideas.md**: AI notes potential improvements
@@ -374,7 +374,7 @@ As you use warping:
 
 ## 🎓 Philosophy
 
-Warping embodies:
+Deft embodies:
 
 - **Correctness over convenience**: Optimize for long-term quality
 - **Standards over flexibility**: Consistent patterns across projects

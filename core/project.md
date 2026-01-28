@@ -1,4 +1,4 @@
-# Warping Framework Project Guidelines
+# Deft Framework Project Guidelines
 
 Legend (from RFC2119): !=MUST, ~=SHOULD, ≉=SHOULD NOT, ⊗=MUST NOT, ?=MAY.
 

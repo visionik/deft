@@ -1,30 +1,30 @@
 ---
-name: warping
-description: Apply warping framework standards for AI-assisted development. Use when starting projects, writing code, running tests, making commits, or when the user references warping, project standards, or coding guidelines.
+name: deft
+description: Apply deft framework standards for AI-assisted development. Use when starting projects, writing code, running tests, making commits, or when the user references deft, project standards, or coding guidelines.
 user-invocable: false
 metadata:
   clawdbot:
     requires:
       bins: ["task"]
-    homepage: "https://github.com/visionik/warping"
+    homepage: "https://github.com/visionik/deft"
 os: ["darwin", "linux"]
 ---
 
-# Warping Framework
+# Deft Framework
 
 A layered framework for AI-assisted development with consistent standards and workflows.
 
 ## When This Skill Activates
 
 This skill automatically loads when you:
-- Start work in a warping-enabled project (has `./warping/` directory)
-- Reference warping, project standards, or coding conventions
+- Start work in a deft-enabled project (has `./deft/` directory)
+- Reference deft, project standards, or coding conventions
 - Run tests, make commits, or perform quality checks
 - Ask about project structure, workflows, or best practices
 
 ## Core Principle: Rule Precedence
 
-Warping uses hierarchical rules where more specific overrides general:
+Deft uses hierarchical rules where more specific overrides general:
 
 ```
 user.md          ← HIGHEST precedence (personal preferences)
@@ -44,24 +44,24 @@ specification.md ← LOWEST precedence (requirements)
 
 ## File Reading Strategy (Lazy Loading)
 
-**DO NOT** read all warping files at once. Read only what you need:
+**DO NOT** read all deft files at once. Read only what you need:
 
-1. **Always start with**: `./warping/main.md` (general guidelines)
-2. **Check for**: `./warping/core/user.md` (personal overrides - highest precedence)
-3. **Check for**: `./warping/core/project.md` (project-specific rules)
+1. **Always start with**: `./deft/main.md` (general guidelines)
+2. **Check for**: `./deft/core/user.md` (personal overrides - highest precedence)
+3. **Check for**: `./deft/core/project.md` (project-specific rules)
 4. **Then read language-specific** only if working with that language:
-   - `./warping/languages/python.md`
-   - `./warping/languages/go.md`
-   - `./warping/languages/typescript.md`
-   - `./warping/languages/cpp.md`
+   - `./deft/languages/python.md`
+   - `./deft/languages/go.md`
+   - `./deft/languages/typescript.md`
+   - `./deft/languages/cpp.md`
 5. **Read tool files** only when using that tool:
-   - `./warping/tools/taskfile.md` (when running tasks)
-   - `./warping/scm/git.md` (when using git)
-   - `./warping/scm/github.md` (when using GitHub)
+   - `./deft/tools/taskfile.md` (when running tasks)
+   - `./deft/scm/git.md` (when using git)
+   - `./deft/scm/github.md` (when using GitHub)
 
 ## Task-Centric Workflow
 
-Warping projects use **Taskfile** as the universal task runner.
+Deft projects use **Taskfile** as the universal task runner.
 
 ### Discovery
 ```bash
@@ -84,7 +84,7 @@ task clean         # Clean artifacts
 
 ## Test-Driven Development (TDD)
 
-Warping embraces TDD by default:
+Deft embraces TDD by default:
 
 1. **Write test first** - Define expected behavior
 2. **Watch it fail** - Confirm test fails correctly
@@ -101,12 +101,12 @@ Warping embraces TDD by default:
 
 For new features or projects:
 
-1. **Build PRD.md** - Run `warping.sh spec` to create Product Requirements Document
+1. **Build PRD.md** - Run `deft.sh spec` to create Product Requirements Document
 2. **AI Interview** - Answer focused questions to clarify requirements
 3. **PRD.md Review** - Let user review/change PRD.md if they want
-4. **Generate SPECIFICATION.md** - use PRD.md + Warping rules to build a complete spec with phases, dependencies, and tasks
+4. **Generate SPECIFICATION.md** - use PRD.md + Deft rules to build a complete spec with phases, dependencies, and tasks
 5. **SPECIFICATION.md review** -- Let user review/change SPECIFICATION.md if they want
-5. **Implement** - Build according to spec, following all applicable warping rules
+5. **Implement** - Build according to spec, following all applicable deft rules
 
 ## Quality Standards
 
@@ -170,21 +170,21 @@ refactor: code restructuring
 
 ## New Project Workflow
 
-When user says "start a new project with warping", "use warping to build X", or similar, follow this complete workflow:
+When user says "start a new project with deft", "use deft to build X", or similar, follow this complete workflow:
 
-### Step 1: Initialize Warping Structure
+### Step 1: Initialize Deft Structure
 ```bash
-./warping.sh init
+./deft.sh init
 ```
-- Creates `./warping/` directory with framework files
+- Creates `./deft/` directory with framework files
 - Sets up `secrets/` directory
 - Creates basic `Taskfile.yml`
 - Adds `.gitignore` for secrets
 
 ### Step 2: User Configuration (First Time Only)
-Check if `./warping/core/user.md` exists. If not:
+Check if `./deft/core/user.md` exists. If not:
 ```bash
-./warping.sh bootstrap
+./deft.sh bootstrap
 ```
 - Prompts for user name
 - Sets default coverage threshold
@@ -193,7 +193,7 @@ Check if `./warping/core/user.md` exists. If not:
 
 ### Step 3: Project Configuration
 ```bash
-./warping.sh project
+./deft.sh project
 ```
 - Prompts for project name
 - Selects project type (CLI, TUI, REST API, Web App, Library, Other)
@@ -203,7 +203,7 @@ Check if `./warping/core/user.md` exists. If not:
 
 ### Step 4: Specification-Driven Development
 ```bash
-./warping.sh spec
+./deft.sh spec
 ```
 
 This launches the full SDD workflow:
@@ -228,7 +228,7 @@ This launches the full SDD workflow:
 - Wait for confirmation before proceeding
 
 **d) Generate SPECIFICATION.md**:
-- Use PRD.md + warping rules to create complete implementation spec
+- Use PRD.md + deft rules to create complete implementation spec
 - Include clear phases, subphases, and tasks
 - Map dependencies (what blocks what)
 - Identify parallel work opportunities
@@ -240,7 +240,7 @@ This launches the full SDD workflow:
 
 **f) Begin Implementation**:
 - Follow the SPECIFICATION.md plan
-- Apply all warping rules (TDD, quality standards, task-centric)
+- Apply all deft rules (TDD, quality standards, task-centric)
 - Maintain ≥85% coverage
 - Run `task check` before each commit
 - Use Conventional Commits format
@@ -257,21 +257,21 @@ This launches the full SDD workflow:
 ### For New Projects (Full Workflow)
 Use the "New Project Workflow" above when starting from scratch.
 
-### For Existing Warping Projects
-1. Check for `./warping/` directory
-2. Read `./warping/main.md` for general guidelines
-3. Read `./warping/core/user.md` for user preferences
-4. Read `./warping/core/project.md` for project rules
+### For Existing Deft Projects
+1. Check for `./deft/` directory
+2. Read `./deft/main.md` for general guidelines
+3. Read `./deft/core/user.md` for user preferences
+4. Read `./deft/core/project.md` for project rules
 5. Run `task --list` to see available tasks
 
 ### For New Features in Existing Projects
-1. Consider running `./warping.sh spec` for complex features
+1. Consider running `./deft.sh spec` for complex features
 2. Follow SDD process (PRD → Interview → Specification → Implement)
 3. Or for simple features, just follow TDD directly
 
 ## Self-Improvement Mechanism
 
-Warping learns and evolves:
+Deft learns and evolves:
 
 - `meta/lessons.md` - Patterns learned during development (AI can update)
 - `meta/ideas.md` - Future improvements noticed
@@ -298,13 +298,13 @@ When you discover a better pattern or make repeated corrections, consider updati
 - Update docs when changing behavior
 - Use RFC2119 notation in technical docs (!, ~, ?, ⊗, ≉)
 
-## Working with Warping
+## Working with Deft
 
 ### First Time in a Project
-1. Check for `./warping/` directory
-2. Read `./warping/main.md`
-3. Check `./warping/core/user.md` for user preferences
-4. Check `./warping/core/project.md` for project rules
+1. Check for `./deft/` directory
+2. Read `./deft/main.md`
+3. Check `./deft/core/user.md` for user preferences
+4. Check `./deft/core/project.md` for project rules
 5. Run `task --list` to see available tasks
 
 ### During Development
@@ -316,9 +316,9 @@ When you discover a better pattern or make repeated corrections, consider updati
 6. Push changes
 
 ### When Stuck
-- Check `./warping/REFERENCES.md` for guidance on which files to read
+- Check `./deft/REFERENCES.md` for guidance on which files to read
 - Review `meta/lessons.md` for learned patterns
-- Consult language-specific files in `./warping/languages/`
+- Consult language-specific files in `./deft/languages/`
 - Check `Taskfile.yml` for available commands
 
 ## Example Workflows
@@ -370,36 +370,36 @@ git commit -m "fix: resolve issue with X"
 This SKILL.md follows the **AgentSkills specification**, making it compatible with multiple AI platforms.
 
 ### With Claude Code
-- This SKILL.md file teaches Claude Code about warping
-- Place in `~/.claude/skills/warping/` (personal) or `.claude/skills/warping/` (project)
+- This SKILL.md file teaches Claude Code about deft
+- Place in `~/.claude/skills/deft/` (personal) or `.claude/skills/deft/` (project)
 - Claude automatically applies these rules when relevant
 - Works in VS Code via Claude Code extension
 
 ### With clawd.bot
 - Compatible with clawd.bot's AgentSkills system
-- Place in `~/.clawdbot/skills/warping/` (shared) or `<workspace>/skills/warping/` (per-agent)
-- Install via ClawdHub: `clawdhub sync warping` (once published)
+- Place in `~/.clawdbot/skills/deft/` (shared) or `<workspace>/skills/deft/` (per-agent)
+- Install via ClawdHub: `clawdhub sync deft` (once published)
 - Works across WhatsApp, Telegram, Discord, and other channels
 - Requires `task` binary (specified in metadata)
 - Supports macOS and Linux (specified in `os` field)
 
 ### With Warp AI
-- Upload warping files to Warp Drive
-- Create Warp rules referencing warping/*.md files
+- Upload deft files to Warp Drive
+- Create Warp rules referencing deft/*.md files
 - Use `WARP.md` or `AGENTS.md` in project root
 
 ### Skill Locations
 
 **Claude Code**:
-- Personal: `~/.claude/skills/warping/SKILL.md`
-- Project: `.claude/skills/warping/SKILL.md`
+- Personal: `~/.claude/skills/deft/SKILL.md`
+- Project: `.claude/skills/deft/SKILL.md`
 
 **clawd.bot**:
-- Shared (all agents): `~/.clawdbot/skills/warping/SKILL.md`
-- Per-agent: `<workspace>/skills/warping/SKILL.md`
-- Via registry: `clawdhub sync warping`
+- Shared (all agents): `~/.clawdbot/skills/deft/SKILL.md`
+- Per-agent: `<workspace>/skills/deft/SKILL.md`
+- Via registry: `clawdhub sync deft`
 
-**Warping files**: `./warping/*.md` (framework files)
+**Deft files**: `./deft/*.md` (framework files)
 
 ### Publishing to Registries
 
@@ -416,7 +416,7 @@ This SKILL.md follows the **AgentSkills specification**, making it compatible wi
 ### Multi-Platform Benefits
 
 - **Same format** - Write once, use everywhere
-- **Consistent standards** - Warping rules apply across all AI assistants
+- **Consistent standards** - Deft rules apply across all AI assistants
 - **Universal workflows** - TDD, SDD, quality checks work in any context
 - **Shared knowledge** - Updates propagate to all platforms
 
@@ -430,10 +430,10 @@ This SKILL.md follows the **AgentSkills specification**, making it compatible wi
 | Check coverage | `task test:coverage` |
 | Format code | `task fmt` |
 | Lint code | `task lint` |
-| Initialize warping | `warping.sh init` |
-| Configure user | `warping.sh bootstrap` |
-| Configure project | `warping.sh project` |
-| Generate spec | `warping.sh spec` |
+| Initialize deft | `deft.sh init` |
+| Configure user | `deft.sh bootstrap` |
+| Configure project | `deft.sh project` |
+| Generate spec | `deft.sh spec` |
 
 ## Remember
 
@@ -448,4 +448,4 @@ This SKILL.md follows the **AgentSkills specification**, making it compatible wi
 
 ---
 
-For more details, read the specific files in `./warping/` as needed. Start with `main.md` and follow the precedence hierarchy.
+For more details, read the specific files in `./deft/` as needed. Start with `main.md` and follow the precedence hierarchy.

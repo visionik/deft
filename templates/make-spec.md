@@ -41,7 +41,7 @@ N. [feature]
 ## Output Generation
 
 - ! Generate as SPECIFICATION.md
-- ! follow all relevant warping guidelines
+- ! follow all relevant deft guidelines
 - ! use RFC2119 MUST, SHOULD, MAY, SHOULD NOT, MUST NOT wording
 - ! Break into phases, subphases, tasks
 - ! end of each phase/subphase must implement and run testing until it passes

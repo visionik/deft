@@ -1,10 +1,10 @@
-# Using Warping with AI Assistants (Claude Code & clawd.bot)
+# Using Deft with AI Assistants (Claude Code & clawd.bot)
 
-This guide explains how to integrate the warping framework with AI assistants using the AgentSkills specification.
+This guide explains how to integrate the deft framework with AI assistants using the AgentSkills specification.
 
 ## AgentSkills Specification
 
-Warping's SKILL.md follows the **AgentSkills specification**, making it compatible with:
+Deft's SKILL.md follows the **AgentSkills specification**, making it compatible with:
 - **Claude Code** - AI-powered IDE assistant
 - **clawd.bot** - Personal AI assistant (WhatsApp, Telegram, Discord, etc.)
 - Any other AgentSkills-compatible system
@@ -17,29 +17,29 @@ Warping's SKILL.md follows the **AgentSkills specification**, making it compatib
 
 ### Option 1: Personal Skill (Recommended)
 
-Install warping as a personal skill to use across all your projects:
+Install deft as a personal skill to use across all your projects:
 
 ```bash
 # Create personal skills directory
-mkdir -p ~/.claude/skills/warping
+mkdir -p ~/.claude/skills/deft
 
 # Copy SKILL.md to personal skills
-cp /path/to/warping-0.2.0/SKILL.md ~/.claude/skills/warping/
+cp /path/to/deft-0.2.0/SKILL.md ~/.claude/skills/deft/
 
 # Optional: Symlink for easier updates
-ln -sf /path/to/warping-0.2.0/SKILL.md ~/.claude/skills/warping/SKILL.md
+ln -sf /path/to/deft-0.2.0/SKILL.md ~/.claude/skills/deft/SKILL.md
 ```
 
 ### Option 2: Project-Specific Skill
 
-Install warping for a specific project only:
+Install deft for a specific project only:
 
 ```bash
 # In your project directory
-mkdir -p .claude/skills/warping
+mkdir -p .claude/skills/deft
 
 # Copy or link SKILL.md
-cp ./warping/SKILL.md .claude/skills/warping/
+cp ./deft/SKILL.md .claude/skills/deft/
 ```
 
 ### Option 3: Use Both
@@ -52,16 +52,16 @@ You can have both personal and project-specific installations. Claude Code will 
 
 <cite index="1-14,1-15">By default, both you and Claude can invoke any skill. Claude can load it automatically when relevant to your conversation.</cite>
 
-The warping skill has `user-invocable: false`, which means:
+The deft skill has `user-invocable: false`, which means:
 - <cite index="1-19,1-20">Only Claude can invoke the skill, used for background knowledge that isn't actionable as a command.</cite>
-- Claude automatically applies warping standards when you work in warping-enabled projects
-- You don't need to type `/warping` to activate it
+- Claude automatically applies deft standards when you work in deft-enabled projects
+- You don't need to type `/deft` to activate it
 
 ### When It Activates
 
-Claude Code will automatically apply warping standards when:
-- You're in a directory with `./warping/` subdirectory
-- You mention warping, project standards, or coding guidelines
+Claude Code will automatically apply deft standards when:
+- You're in a directory with `./deft/` subdirectory
+- You mention deft, project standards, or coding guidelines
 - You run tests, make commits, or perform quality checks
 - You ask about project structure or best practices
 
@@ -71,10 +71,10 @@ Claude Code will automatically apply warping standards when:
 
 ## What the Skill Teaches Claude
 
-The warping SKILL.md teaches Claude Code about:
+The deft SKILL.md teaches Claude Code about:
 
 1. **Rule Precedence** - How user.md > project.md > language.md hierarchy works
-2. **Lazy Loading** - Only read warping files as needed, not all at once
+2. **Lazy Loading** - Only read deft files as needed, not all at once
 3. **Task-Centric Workflow** - Use `task` commands for all operations
 4. **Test-Driven Development** - Write tests before implementation
 5. **Quality Standards** - Always run `task check` before commits
@@ -88,10 +88,10 @@ To verify the skill is installed:
 
 ```bash
 # Check personal skills
-ls -la ~/.claude/skills/warping/
+ls -la ~/.claude/skills/deft/
 
 # Check project skills (in project directory)
-ls -la .claude/skills/warping/
+ls -la .claude/skills/deft/
 
 # In Claude Code, the skill will automatically load when relevant
 ```
@@ -100,11 +100,11 @@ ls -la .claude/skills/warping/
 
 ### Starting a New Project
 
-You: "I want to start a new Python CLI project with warping"
+You: "I want to start a new Python CLI project with deft"
 
 Claude will:
-1. Auto-load the warping skill
-2. Initialize warping structure
+1. Auto-load the deft skill
+2. Initialize deft structure
 3. Set up Python with pytest, ruff, mypy
 4. Create Taskfile with standard tasks
 5. Apply ≥85% coverage requirement
@@ -114,9 +114,9 @@ Claude will:
 You: "Let's add a new feature to this module"
 
 Claude will:
-1. Read `./warping/main.md` for general guidelines
-2. Check for `./warping/core/user.md` and `./warping/core/project.md`
-3. Read `./warping/languages/python.md` (if Python)
+1. Read `./deft/main.md` for general guidelines
+2. Check for `./deft/core/user.md` and `./deft/core/project.md`
+3. Read `./deft/languages/python.md` (if Python)
 4. Write tests first (TDD)
 5. Implement feature
 6. Run `task check` before suggesting commit
@@ -135,12 +135,12 @@ Claude will:
 
 ### Per-Project Overrides
 
-Create `.claude/skills/warping/SKILL.md` in your project to override the personal skill with project-specific variations.
+Create `.claude/skills/deft/SKILL.md` in your project to override the personal skill with project-specific variations.
 
 ### Combining with Other Skills
 
-Warping skill works alongside other Claude Code skills. For example:
-- Use warping for standards and workflows
+Deft skill works alongside other Claude Code skills. For example:
+- Use deft for standards and workflows
 - Use other skills for specific tasks (e.g., AWS deployment)
 - Skills are modular and work together
 
@@ -150,7 +150,7 @@ Warping skill works alongside other Claude Code skills. For example:
 
 1. **Check file location**:
    ```bash
-   ls -la ~/.claude/skills/warping/SKILL.md
+   ls -la ~/.claude/skills/deft/SKILL.md
    ```
 
 2. **Verify YAML frontmatter** - Must be between `---` markers
@@ -159,38 +159,38 @@ Warping skill works alongside other Claude Code skills. For example:
 
 ### Conflicting Instructions
 
-If warping conflicts with another skill:
-1. Warping respects user.md as highest precedence
+If deft conflicts with another skill:
+1. Deft respects user.md as highest precedence
 2. Edit your user.md to specify preferences
 3. Consider disabling conflicting skills
 
 ### Skill Not Activating Automatically
 
-The warping skill should auto-activate, but if not:
-- Make sure you're in a directory with `./warping/`
-- Explicitly mention "warping" or "project standards" in your request
+The deft skill should auto-activate, but if not:
+- Make sure you're in a directory with `./deft/`
+- Explicitly mention "deft" or "project standards" in your request
 - Check that `user-invocable: false` is set in SKILL.md
 
 ## Best Practices
 
 1. **Use personal skill for consistency** across all projects
-2. **Keep SKILL.md updated** - Pull latest from warping repository
+2. **Keep SKILL.md updated** - Pull latest from deft repository
 3. **Symlink for easy updates** rather than copying
 4. **Let Claude auto-invoke** - Don't manually trigger unless needed
 5. **Trust the hierarchy** - user.md > project.md > language.md
 
 ## Advanced: Skill Structure
 
-The warping SKILL.md follows this structure:
+The deft SKILL.md follows this structure:
 
 ```markdown
 ---
-name: warping
-description: Apply warping framework standards...
+name: deft
+description: Apply deft framework standards...
 user-invocable: false
 ---
 
-# Warping Framework
+# Deft Framework
 [Core instructions]
 
 ## Rule Precedence
@@ -202,38 +202,38 @@ user-invocable: false
 [Additional sections...]
 ```
 
-<cite index="1-12">Keep SKILL.md under 500 lines. Move detailed reference material to separate files.</cite> The warping SKILL.md is optimized at ~327 lines with references to actual `./warping/*.md` files for details.
+<cite index="1-12">Keep SKILL.md under 500 lines. Move detailed reference material to separate files.</cite> The deft SKILL.md is optimized at ~327 lines with references to actual `./deft/*.md` files for details.
 
 ## Using with clawd.bot
 
-clawd.bot is a personal AI assistant that works across WhatsApp, Telegram, Discord, and other messaging platforms. It uses the same AgentSkills specification as Claude Code, so the warping SKILL.md works seamlessly.
+clawd.bot is a personal AI assistant that works across WhatsApp, Telegram, Discord, and other messaging platforms. It uses the same AgentSkills specification as Claude Code, so the deft SKILL.md works seamlessly.
 
 ### Installation for clawd.bot
 
 **Option 1: Manual Install (Shared)**
 ```bash
 # Install for all agents on this machine
-mkdir -p ~/.clawdbot/skills/warping
-cp /path/to/warping-0.2.0/SKILL.md ~/.clawdbot/skills/warping/
+mkdir -p ~/.clawdbot/skills/deft
+cp /path/to/deft-0.2.0/SKILL.md ~/.clawdbot/skills/deft/
 
 # Or symlink for auto-updates
-ln -sf /path/to/warping-0.2.0/SKILL.md ~/.clawdbot/skills/warping/SKILL.md
+ln -sf /path/to/deft-0.2.0/SKILL.md ~/.clawdbot/skills/deft/SKILL.md
 ```
 
 **Option 2: Per-Agent Install**
 ```bash
 # Install for a specific agent workspace
-mkdir -p <workspace>/skills/warping
-cp SKILL.md <workspace>/skills/warping/
+mkdir -p <workspace>/skills/deft
+cp SKILL.md <workspace>/skills/deft/
 ```
 
 **Option 3: Via ClawdHub (Once Published)**
 ```bash
 # Install from the registry
-clawdhub sync warping
+clawdhub sync deft
 
 # Update to latest
-clawdhub sync warping --latest
+clawdhub sync deft --latest
 ```
 
 ### clawd.bot Requirements
@@ -245,7 +245,7 @@ metadata:
   clawdbot:
     requires:
       bins: ["task"]  # Requires taskfile binary
-    homepage: "https://github.com/visionik/warping"
+    homepage: "https://github.com/visionik/deft"
 os: ["darwin", "linux"]  # macOS and Linux only
 ```
 
@@ -260,20 +260,20 @@ sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b ~/.local/bin
 
 ### Usage with clawd.bot
 
-Warping works the same way across messaging platforms:
+Deft works the same way across messaging platforms:
 
 **Via WhatsApp**:
 ```
-You: "Start a new Python project with warping"
-Clawd: *Auto-loads warping skill*
+You: "Start a new Python project with deft"
+Clawd: *Auto-loads deft skill*
        *Runs initialization workflow*
        *Applies all standards*
 ```
 
 **Via Telegram/Discord**:
 ```
-You: "Fix this bug using warping standards"
-Clawd: *Loads warping*
+You: "Fix this bug using deft standards"
+Clawd: *Loads deft*
        *Writes failing test first*
        *Fixes code*
        *Runs task check*
@@ -288,17 +288,17 @@ With clawd.bot, you can have multiple agents with different skill sets:
 - **Per-agent skills** (`<workspace>/skills/`) - Specific to one agent
 
 For example:
-- Main coding agent: Has warping + development skills
-- Ops agent: Has warping + deployment skills  
-- Personal agent: No warping, just life tasks
+- Main coding agent: Has deft + development skills
+- Ops agent: Has deft + deployment skills  
+- Personal agent: No deft, just life tasks
 
 ### Publishing to ClawdHub
 
-To share the warping skill with the clawd.bot community:
+To share the deft skill with the clawd.bot community:
 
 ```bash
 # From the skill directory
-cd /path/to/warping-0.2.0
+cd /path/to/deft-0.2.0
 
 # Publish to ClawdHub
 clawdhub publish
@@ -320,21 +320,21 @@ Browse published skills at https://clawdhub.com
 - [ClawdHub Registry](https://clawdhub.com)
 - [GitHub Repository](https://github.com/clawdbot/clawdbot)
 
-**Warping**:
-- [Warping Framework README](../README.md)
-- [Warping REFERENCES.md](../warping/REFERENCES.md)
-- [GitHub Repository](https://github.com/visionik/warping)
+**Deft**:
+- [Deft Framework README](../README.md)
+- [Deft REFERENCES.md](../deft/REFERENCES.md)
+- [GitHub Repository](https://github.com/visionik/deft)
 
 ## Cross-Platform Benefits
 
 Using the AgentSkills specification means:
 
 1. **Write once, use everywhere** - Same SKILL.md for Claude Code, clawd.bot, and future platforms
-2. **Consistent standards** - Your warping rules apply across IDE and messaging platforms
+2. **Consistent standards** - Your deft rules apply across IDE and messaging platforms
 3. **Single source of truth** - Update once, propagates everywhere
 4. **Community sharing** - Publish to multiple registries simultaneously
 5. **Universal workflows** - TDD, SDD, and quality standards work in any context
 
 ---
 
-**Note**: The warping SKILL.md is designed for maximum compatibility with any AgentSkills-compatible system.
+**Note**: The deft SKILL.md is designed for maximum compatibility with any AgentSkills-compatible system.

@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to the Warping framework will be documented in this file.
+All notable changes to the Deft framework will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
@@ -8,20 +8,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.2.5] - 2026-01-23
 
 ### Added
-- **`wrun reset` command**: Reset configuration files to default/empty state
+- **`run reset` command**: Reset configuration files to default/empty state
   - Interactive mode: prompts for each file individually
   - Batch mode (`--all`): resets all files without prompting
   - Resets user.md to default template, deletes project.md/PRD.md/SPECIFICATION.md
 - **Guided workflow prompts**: Commands now chain together interactively
-  - `wrun install` asks to run `wrun project` after completion
-  - `wrun bootstrap` asks to run `wrun project` after completion (if in warping directory)
-  - `wrun project` asks to run `wrun spec` after completion
+  - `run install` asks to run `run project` after completion
+  - `run bootstrap` asks to run `run project` after completion (if in deft directory)
+  - `run project` asks to run `run spec` after completion
   - Creates smooth guided flow: install → bootstrap → project → spec
 - **Enhanced command descriptions**: Each command now shows detailed explanation at startup
-  - `wrun install`: Shows what will be created (warping/, secrets/, docs/, Taskfile.yml, .gitignore)
-  - `wrun project`: Explains project.md purpose (tech stack, quality standards, workflow)
-  - `wrun spec`: Explains PRD.md creation and AI interview process
-- **Smart project name detection**: `wrun spec` reads project name from project.md
+  - `run install`: Shows what will be created (deft/, secrets/, docs/, Taskfile.yml, .gitignore)
+  - `run project`: Explains project.md purpose (tech stack, quality standards, workflow)
+  - `run spec`: Explains PRD.md creation and AI interview process
+- **Smart project name detection**: `run spec` reads project name from project.md
   - Auto-suggests project name if project.md exists
   - Falls back to manual input if not found
 - **Improved prompt_toolkit installation**: Better detection and instructions
@@ -32,16 +32,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Links to PEP 668 documentation
 
 ### Changed
-- **Renamed `wrun.py` → `wrun`**: Removed .py extension for cleaner command
+- **Renamed `run.py` → `run`**: Removed .py extension for cleaner command
   - Follows Unix convention for executables
   - More professional appearance
   - All documentation updated
-- **Renamed `wrun init` → `wrun install`**: Better matches common tooling patterns
+- **Renamed `run init` → `run install`**: Better matches common tooling patterns
   - Aligns with Makefile/Taskfile conventions (make install, task install)
-  - Clearer intent: "install warping framework"
+  - Clearer intent: "install deft framework"
   - Less confusion with bootstrap command
   - Updated all references: "initialized" → "installed", "Reinitialize" → "Reinstall"
-- **Updated README.md**: Added Quick Start section with wrun commands
+- **Updated README.md**: Added Quick Start section with run commands
   - Shows complete workflow: install → bootstrap → project → spec
   - Lists all available commands with descriptions
 
@@ -56,7 +56,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - **AgentSkills Integration**: Added `SKILL.md` for Claude Code and clawd.bot compatibility
   - Follows AgentSkills specification for universal AI assistant compatibility
-  - Auto-invokes when working in warping projects or mentioning warping standards
+  - Auto-invokes when working in deft projects or mentioning deft standards
   - Teaches AI assistants about rule precedence, lazy loading, TDD, SDD, and quality standards
   - Includes comprehensive "New Project Workflow" section with step-by-step guidance
   - Documents complete SDD process: PRD → AI Interview → Specification → Implementation
@@ -84,12 +84,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.2.3] - 2026-01-22
 
 ### Added
-- **Project Type Selection**: Added "Other" option (option 6) to project type selection in `warping.sh project`
+- **Project Type Selection**: Added "Other" option (option 6) to project type selection in `deft.sh project`
   - Prompts for custom project type when selected
   - Allows flexibility for project types beyond CLI, TUI, REST API, Web App, and Library
 
 ### Changed
-- **Spec Command Output**: Improved next steps messaging in `warping.sh spec`
+- **Spec Command Output**: Improved next steps messaging in `deft.sh spec`
   - Now displays full absolute paths to PRD.md and SPECIFICATION.md
   - Updated AI assistant references to "Claude, Warp.dev, etc."
   - Added steps 5-7 with guidance on reviewing, implementing, and continuing with AI
@@ -134,11 +134,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 #### Core Features
-- **CLI Tool**: New `warping.sh` script for bootstrapping and project setup
-  - `warping.sh bootstrap` - Set up user preferences
-  - `warping.sh project` - Configure project settings
-  - `warping.sh init` - Initialize warping in a new project
-  - `warping.sh validate` - Validate configuration files
+- **CLI Tool**: New `deft.sh` script for bootstrapping and project setup
+  - `deft.sh bootstrap` - Set up user preferences
+  - `deft.sh project` - Configure project settings
+  - `deft.sh init` - Initialize deft in a new project
+  - `deft.sh validate` - Validate configuration files
 - **Task Automation**: Added `Taskfile.yml` with framework management tasks
   - `task validate` - Validate all markdown files
   - `task build` - Package framework for distribution
@@ -188,7 +188,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Fuzzing Standards**: Added ≥50 fuzzing tests per input point requirement
 
 ### Removed
-- **Pronouns Field**: Removed from user bootstrap process in `warping.sh`
+- **Pronouns Field**: Removed from user bootstrap process in `deft.sh`
 
 ### Fixed
 - All internal references updated to reflect new directory structure
@@ -197,7 +197,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.1.0] - Initial Release
 
-Initial release of the Warping framework with:
+Initial release of the Deft framework with:
 - Core AI guidelines (main.md)
 - Python and Go language standards
 - Basic project structure
@@ -209,7 +209,7 @@ Initial release of the Warping framework with:
 ## Migration Guide: 0.1.0 → 0.2.0
 
 ### File Paths
-If you have custom scripts or references to warping files, update these paths:
+If you have custom scripts or references to deft files, update these paths:
 - `core/coding.md` → `coding/coding.md`
 - `tools/testing.md` → `coding/testing.md`
 
@@ -219,15 +219,15 @@ If you have custom scripts or references to warping files, update these paths:
 3. Your `core/user.md` will be ignored by git
 
 ### New Features to Explore
-- Run `warping.sh bootstrap` to set up user preferences interactively
+- Run `deft.sh bootstrap` to set up user preferences interactively
 - Check out `REFERENCES.md` for lazy-loading guidance
 - Explore new interface guidelines if building CLIs, APIs, or UIs
 - Review enhanced language standards for Python, Go, TypeScript, and C++
 
-[0.2.5]: https://github.com/visionik/warping/releases/tag/v0.2.5
-[0.2.4]: https://github.com/visionik/warping/releases/tag/v0.2.4
-[0.2.3]: https://github.com/visionik/warping/releases/tag/v0.2.3
-[0.2.2]: https://github.com/visionik/warping/releases/tag/v0.2.2
-[0.2.1]: https://github.com/visionik/warping/releases/tag/v0.2.1
-[0.2.0]: https://github.com/visionik/warping/releases/tag/v0.2.0
-[0.1.0]: https://github.com/visionik/warping/releases/tag/v0.1.0
+[0.2.5]: https://github.com/visionik/deft/releases/tag/v0.2.5
+[0.2.4]: https://github.com/visionik/deft/releases/tag/v0.2.4
+[0.2.3]: https://github.com/visionik/deft/releases/tag/v0.2.3
+[0.2.2]: https://github.com/visionik/deft/releases/tag/v0.2.2
+[0.2.1]: https://github.com/visionik/deft/releases/tag/v0.2.1
+[0.2.0]: https://github.com/visionik/deft/releases/tag/v0.2.0
+[0.1.0]: https://github.com/visionik/deft/releases/tag/v0.1.0
