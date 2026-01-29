@@ -1,20 +1,22 @@
-# License
+# MIT License
 
-**Deft**  
-Copyright © 2025-2026 Jonathan Taylor (visionik@pobox.com)
+Copyright (c) 2025-2026 Jonathan "visionik" Taylor
+https://deft.md
 
-## Current Terms (Effective Until December 31, 2026)
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-If you have access to this repository, you have permission to **use** (but not distribute) Deft until **December 31, 2026**.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-## Future Plans
-
-Long-term usage terms will be established by December 31, 2026.
-
-Current thinking is that Deft will be released under a permissive license preventing resale in original or derivative forms.
-
-**No promises.**
-
----
-
-For questions about licensing, please contact the copyright holder.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

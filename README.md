@@ -1,8 +1,10 @@
-# Deft Process
+# Deft
 
 **A layered framework for AI-assisted development with consistent standards and workflows.**
 
-Copyright © 2025-2026 Jonathan Taylor (visionik@pobox.com). See [LICENSE.md](./LICENSE.md) for usage terms.
+Copyright © 2025-2026 Jonathan "visionik" Taylor  
+https://deft.md  
+Licensed under the [MIT License](./LICENSE.md)
 
 ## 🎯 What is Deft?
 
@@ -47,7 +49,7 @@ specification.md ← Lowest precedence (project requirements)
 ### 📁 Directory Structure
 
 ```
-deft-0.2.0/
+deft/
 ├── README.md              # This file
 ├── main.md                # Entry point - general AI guidelines
 │
