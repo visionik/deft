@@ -5,6 +5,17 @@ All notable changes to the Deft framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0] - 2026-01-29
+
+### Changed
+- **Project renamed from Warping to Deft**: Complete rebrand across all files and documentation
+  - CLI command renamed from `wrun` to `run`
+  - All references to "Warping" replaced with "Deft" throughout documentation
+  - GitHub repository renamed from `visionik/warping` to `visionik/deft`
+  - Local directory renamed to match new project name
+  - Updated LICENSE.md, README.md, and all markdown files
+  - Updated Taskfile.yml project name variable
+
 ## [0.2.5] - 2026-01-23
 
 ### Added

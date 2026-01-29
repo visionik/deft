@@ -16,7 +16,7 @@ from pathlib import Path
 from datetime import datetime
 from typing import List, Optional
 
-VERSION = "0.2.5"
+VERSION = "0.3.0"
 
 # Try to import prompt_toolkit for best input experience
 try:
@@ -95,10 +95,10 @@ Commands:
   bootstrap       Set up your user preferences (user.md)
   project         Create/update project configuration (project.md)
   spec            Generate project specification (interactive interview)
-  install         Install warping framework in a project directory
+  install         Install deft framework in a project directory
   reset           Reset configuration files to default state
-  validate        Validate warping configuration files
-  update          Update warping framework to latest version
+  validate        Validate deft configuration files
+  update          Update deft framework to latest version
   doctor          Check system dependencies and configuration
   help            Show this help message
 
@@ -106,12 +106,12 @@ Examples:
   run bootstrap              # First-time setup
   run project                # Configure current project
   run spec                   # Generate SPECIFICATION.md
-  run install ~/my-project   # Install warping in a project
+  run install ~/my-project   # Install deft in a project
   run reset                  # Reset config files (interactive)
   run reset --all            # Reset all config files (no prompts)
   run validate               # Check configuration is valid
 
-For more information: https://github.com/visionik/warping
+For more information: https://github.com/visionik/deft
 """)
 
 def read_input(prompt_text: str, default: str = "", choices: List[str] = None) -> str:
@@ -160,7 +160,7 @@ def read_yn(prompt_text: str) -> bool:
 
 def cmd_bootstrap(args: List[str]):
     """Bootstrap command - set up user.md"""
-    info("Warping Bootstrap - User Preferences Setup")
+    info("Deft Bootstrap - User Preferences Setup")
     print()
     
     script_dir = get_script_dir()
@@ -210,7 +210,7 @@ def cmd_bootstrap(args: List[str]):
 
 Legend (from RFC2119): !=MUST, ~=SHOULD, ≉=SHOULD NOT, ⊗=MUST NOT, ?=MAY.
 
-**Rule Precedence**: This file has HIGHEST precedence - overrides all other warping rules.
+**Rule Precedence**: This file has HIGHEST precedence - overrides all other deft rules.
 
 ## Name
 
@@ -253,8 +253,8 @@ Address the user as: **{user_name}**
     info("user.md defines your personal preferences and default standards.")
     print()
     
-    # Check if we're in a warping project directory
-    if Path("./warping").is_dir():
+    # Check if we're in a deft project directory
+    if Path("./deft").is_dir():
         info("Next: Configure project-specific settings.")
         if read_yn("Would you like to run 'run project' now?"):
             print()
@@ -271,7 +271,7 @@ Address the user as: **{user_name}**
 def cmd_project(args: List[str]):
     """Project command - configure project.md"""
     print()
-    info("=== Warping Project Configuration ===")
+    info("=== Deft Project Configuration ===")
     print()
     info("This command creates project.md, which defines YOUR project's specifics:")
     info("  • Tech stack and programming language")
@@ -280,15 +280,15 @@ def cmd_project(args: List[str]):
     info("  • Workflow commands (task check, task test, etc.)")
     print()
     info("This file tells AI assistants how to build and maintain YOUR project.")
-    info("It works alongside the general Warping guidelines in ./warping/")
+    info("It works alongside the general Deft guidelines in ./deft/")
     print()
     
-    project_file = Path("./warping/core/project.md")
+    project_file = Path("./deft/core/project.md")
     
     # Check if we're in a project directory
-    if not Path("./warping").is_dir():
-        warn("No ./warping directory found. Run 'run install' first or specify a project directory.")
-        if read_yn("Install warping in current directory?"):
+    if not Path("./deft").is_dir():
+        warn("No ./deft directory found. Run 'run install' first or specify a project directory.")
+        if read_yn("Install deft in current directory?"):
             cmd_install(["."])
         else:
             return 1
@@ -426,7 +426,7 @@ ls secrets/
 def cmd_spec(args: List[str]):
     """Spec command - generate specification via interview"""
     print()
-    info("=== Warping Specification Generator ===")
+    info("=== Deft Specification Generator ===")
     print()
     info("This command creates PRD.md (Product Requirements Document) with:")
     info("  • Your project's core features and requirements")
@@ -448,7 +448,7 @@ def cmd_spec(args: List[str]):
         return 1
     
     # Try to read project name from project.md
-    project_file = Path("./warping/core/project.md")
+    project_file = Path("./deft/core/project.md")
     spec_name = ""
     if project_file.exists():
         try:
@@ -530,15 +530,15 @@ def cmd_spec(args: List[str]):
     return 0
 
 def cmd_install(args: List[str]):
-    """Install command - install warping framework in a project"""
+    """Install command - install deft framework in a project"""
     target_dir = Path(args[0]) if args else Path(".")
     
     print()
-    info("=== Warping Installation ===")
+    info("=== Deft Installation ===")
     print()
     info("This command installs the Deft framework in your project directory.")
     info("It will create:")
-    info("  • ./warping/        - Framework files (guidelines, templates, references)")
+    info("  • ./deft/        - Framework files (guidelines, templates, references)")
     info("  • ./secrets/        - Directory for API keys and credentials (.gitignored)")
     info("  • ./docs/           - Project documentation")
     info("  • Taskfile.yml      - Task automation config (if not present)")
@@ -556,12 +556,12 @@ def cmd_install(args: List[str]):
     os.chdir(target_dir)
     
     try:
-        warping_dir = Path("./warping")
+        deft_dir = Path("./deft")
         
-        # Check if warping already exists
-        already_installed = warping_dir.exists()
+        # Check if deft already exists
+        already_installed = deft_dir.exists()
         if already_installed:
-            warn("Warping already installed in this directory.")
+            warn("Deft already installed in this directory.")
             if not read_yn("Reinstall?"):
                 # Still offer to run project even if not reinstalling
                 print()
@@ -572,14 +572,14 @@ def cmd_install(args: List[str]):
                 else:
                     return 0
         
-        # Copy warping framework
-        info("Copying warping framework...")
+        # Copy deft framework
+        info("Copying deft framework...")
         script_dir = get_script_dir()
         
-        if warping_dir.exists():
-            shutil.rmtree(warping_dir)
+        if deft_dir.exists():
+            shutil.rmtree(deft_dir)
         
-        shutil.copytree(script_dir, warping_dir)
+        shutil.copytree(script_dir, deft_dir)
         
         # Create project-specific files
         Path("secrets").mkdir(exist_ok=True)
@@ -634,7 +634,7 @@ tasks:
             taskfile.write_text(taskfile_content, encoding='utf-8')
             success("Created Taskfile.yml")
         
-        success("Warping installed successfully!")
+        success("Deft installed successfully!")
         print()
         
         # Prompt to run project configuration
@@ -645,16 +645,16 @@ tasks:
         else:
             print()
             info("You can run these commands later:")
-            info("  ./warping/run project     # Configure this project")
-            info("  ./warping/run bootstrap   # Set up user preferences")
+            info("  ./deft/run project     # Configure this project")
+            info("  ./deft/run bootstrap   # Set up user preferences")
             return 0
     
     finally:
         os.chdir(original_dir)
 
 def cmd_validate(args: List[str]):
-    """Validate command - check warping configuration"""
-    info("Validating Warping configuration...")
+    """Validate command - check deft configuration"""
+    info("Validating Deft configuration...")
     print()
     
     script_dir = get_script_dir()
@@ -690,7 +690,7 @@ def cmd_validate(args: List[str]):
     
     print()
     if errors == 0:
-        success("Validation passed! Warping configuration is valid.")
+        success("Validation passed! Deft configuration is valid.")
         return 0
     else:
         error(f"Validation failed with {errors} error(s).")
@@ -698,7 +698,7 @@ def cmd_validate(args: List[str]):
 
 def cmd_doctor(args: List[str]):
     """Doctor command - check system dependencies"""
-    info("Warping Doctor - Checking system...")
+    info("Deft Doctor - Checking system...")
     print()
     
     warnings = 0
@@ -724,7 +724,7 @@ def cmd_doctor(args: List[str]):
     
     # Check directory structure
     print()
-    info("Checking Warping structure...")
+    info("Checking Deft structure...")
     
     script_dir = get_script_dir()
     expected_dirs = ["core", "languages", "interfaces", "tools", "swarm", "templates", "meta"]
@@ -746,21 +746,21 @@ def cmd_doctor(args: List[str]):
     return 0
 
 def cmd_update(args: List[str]):
-    """Update command - update warping framework"""
-    info("Warping update functionality not yet implemented")
-    warn("Manual update: Replace warping directory with latest version from repository")
+    """Update command - update deft framework"""
+    info("Deft update functionality not yet implemented")
+    warn("Manual update: Replace deft directory with latest version from repository")
     return 0
 
 def cmd_reset(args: List[str]):
     """Reset command - reset configuration files to default/empty state"""
     print()
-    info("=== Warping Reset ===")
+    info("=== Deft Reset ===")
     print()
-    info("This command resets warping configuration files to their default state.")
+    info("This command resets deft configuration files to their default state.")
     info("You can choose which files to reset:")
     print()
-    info("  • user.md          - Your personal preferences (in ./warping/core/)")
-    info("  • project.md        - Project configuration (in ./warping/core/)")
+    info("  • user.md          - Your personal preferences (in ./deft/core/)")
+    info("  • project.md        - Project configuration (in ./deft/core/)")
     info("  • PRD.md            - Product requirements document (in current directory)")
     info("  • SPECIFICATION.md  - Generated specification (in current directory)")
     print()
@@ -768,7 +768,7 @@ def cmd_reset(args: List[str]):
     # Check what exists
     script_dir = get_script_dir()
     user_file = script_dir / "core" / "user.md"
-    project_file = Path("./warping/core/project.md")
+    project_file = Path("./deft/core/project.md")
     prd_file = Path("./PRD.md")
     spec_file = Path("./SPECIFICATION.md")
     
@@ -828,7 +828,7 @@ def cmd_reset(args: List[str]):
 
 Legend (from RFC2119): !=MUST, ~=SHOULD, ≉=SHOULD NOT, ⊗=MUST NOT, ?=MAY.
 
-**Rule Precedence**: This file has HIGHEST precedence - overrides all other warping rules.
+**Rule Precedence**: This file has HIGHEST precedence - overrides all other deft rules.
 
 ## Name
 

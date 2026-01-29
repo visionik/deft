@@ -2,7 +2,7 @@
 
 Legend (from RFC2119): !=MUST, ~=SHOULD, ≉=SHOULD NOT, ⊗=MUST NOT, ?=MAY.
 
-**Rule Precedence**: This file has HIGHEST precedence - overrides all other warping rules.
+**Rule Precedence**: This file has HIGHEST precedence - overrides all other deft rules.
 
 ## Name
 
