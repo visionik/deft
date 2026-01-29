@@ -14,6 +14,29 @@ Deft is a SKILL.md that makes AI coding significantly more effective by providin
 
 **Context-efficient:** Deft keeps AI context windows lean through RFC 2119-based notation (!, ~, ≉, ⊗) and lazy-loading—AI only reads the files relevant to the current task, not everything at once.
 
+## 🎸 From Vibe to Virtuoso
+
+**AGENTS.md** is great for vibe-coding—loose guidance, good enough for quick work:
+
+> "Make it clean, I like tests, use TypeScript."
+
+**Deft** is for when you want virtuoso results: precise standards, reproducible workflows, and AI that improves over time.
+
+| Vibe (AGENTS.md) | Virtuoso (Deft) |
+|------------------|-----------------|
+| All rules in one file | Modular—load only what's relevant |
+| Gets bloated across languages/tools | Scales cleanly (python.md stays focused) |
+| Same context loaded every session | Lazy-loading saves tokens |
+| Preferences mixed with standards | Clear separation (user.md vs language files) |
+| No evolution mechanism | Meta files capture learnings automatically |
+| Starts fresh each project | Portable across projects |
+
+**When to use which:**
+- Your AGENTS.md is under 200 lines and you work in one language? Vibe is fine.
+- It's growing unwieldy, you're repeating yourself, or you want consistent quality across projects? Deft pays off.
+
+Same instrument, different mastery.
+
 ## 🎯 What is Deft?
 
 Deft is a structured approach to working with AI coding assistants that provides:
@@ -142,6 +165,12 @@ deft/
 **meta/suggestions.md** - Improvement suggestions
 
 ## 🚀 Getting Started
+
+**Quick start (one-liner):**
+
+```bash
+git clone https://github.com/visionik/deft && deft/run bootstrap
+```
 
 ### 1. Install Deft
 
@@ -351,12 +380,43 @@ Before writing any code, deft uses an AI-assisted specification process:
 
 ## 📝 Contributing to Deft
 
-As you use deft:
+As you use deft, AI maintains three meta files that help the framework evolve:
 
-1. **lessons.md**: AI adds patterns discovered during development
-2. **ideas.md**: AI notes potential improvements
-3. **suggestions.md**: AI records project-specific suggestions
-4. Review these periodically and promote good ideas to main guidelines
+### lessons.md — Patterns discovered during development
+
+```markdown
+## 2026-01-15: Testify suite setup
+When using Testify in Go, always define `suite.Suite` struct with 
+dependencies as fields, not package-level vars. Discovered during 
+auth-service refactor—package vars caused test pollution.
+
+## 2026-01-20: CLI flag defaults
+For CLI tools, default to human-readable output, use `--json` flag 
+for machine output. Users expect pretty by default.
+```
+
+### ideas.md — Potential improvements for later
+
+```markdown
+- [ ] Add `deft/run upgrade` command to pull latest deft without 
+      losing local user.md/project.md customizations
+- [ ] Consider `deft/interfaces/grpc.md` for protobuf/gRPC patterns
+- [ ] Explore integration with cursor rules format
+```
+
+### suggestions.md — Project-specific improvements
+
+```markdown
+## auth-service
+- The retry logic in `client.go` should use exponential backoff 
+  (currently linear)—see coding.md resilience patterns
+
+## api-gateway  
+- Consider splitting routes.go (850 lines) into domain-specific 
+  route files per coding.md file size guidelines
+```
+
+Review these periodically and promote good ideas to main guidelines
 
 ## 🎓 Philosophy
 
