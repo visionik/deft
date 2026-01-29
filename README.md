@@ -150,9 +150,9 @@ deft/
 
 ## 🚀 Getting Started
 
-### Quick Start with `run`
+While Deft is almost entirely pure English/Markdown, it includes a small Python CLI to guide initial setup and configuration:
 
-Deft includes a CLI tool (`run`) for setup and configuration:
+### Quick Start with `run`
 
 ```bash
 # 1. Install deft in your project
