@@ -20,7 +20,7 @@ Deft is a SKILL.md that makes AI coding significantly more effective by providin
 
 ## 🎯 What is Deft?
 
-Deft is a structured approach to working with AI coding assistants (particularly Warp AI) that provides:
+Deft is a structured approach to working with AI coding assistants that provides:
 
 - **Consistent coding standards** across languages and projects
 - **Reproducible workflows** via task-based automation
