@@ -56,7 +56,7 @@ def print_header(text: str):
 def print_section(text: str):
     """Print section header within a command"""
     if HAS_RICH:
-        console.print(Markdown(f"# {text}"))
+        console.print(Markdown(f"## {text}"))
     else:
         print(f"\n{'-' * 60}")
         print(f"  {text}")
