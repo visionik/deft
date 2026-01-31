@@ -23,7 +23,7 @@ try:
     from rich.console import Console
     from rich.prompt import Prompt, Confirm
     from rich.panel import Panel
-    from rich.rule import Rule
+    from rich.markdown import Markdown
     from rich.text import Text
     HAS_RICH = True
     console = Console()
@@ -56,7 +56,7 @@ def print_header(text: str):
 def print_section(text: str):
     """Print section header within a command"""
     if HAS_RICH:
-        console.rule(f"[cyan]{text}[/cyan]")
+        console.print(Markdown(f"# {text}"))
     else:
         print(f"\n{'-' * 60}")
         print(f"  {text}")
