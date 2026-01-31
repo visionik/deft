@@ -1,6 +1,8 @@
 # Deft
 
-**A layered framework for AI-assisted development with consistent standards and workflows.**
+**One-shot, anti-slop**
+
+*A layered framework for AI-assisted development with consistent standards and workflows.*
 
 ## TL;DR
 
