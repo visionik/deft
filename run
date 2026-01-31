@@ -257,7 +257,22 @@ def ask_confirm(prompt_text: str, default: bool = False) -> bool:
         True if user confirms, False otherwise
     """
     try:
-        if HAS_RICH:
+        # Priority: prompt_toolkit > rich > basic input
+        if HAS_PROMPT_TOOLKIT:
+            from prompt_toolkit import prompt as pt_prompt
+            # Add colored prefix if rich is also available
+            if HAS_RICH:
+                prefix = "\033[36m?\033[0m "  # Cyan question mark with ANSI codes
+                display_prompt = f"{prefix}{prompt_text}"
+            else:
+                display_prompt = prompt_text
+            
+            suffix = " (Y/n): " if default else " (y/N): "
+            response = pt_prompt(display_prompt + suffix, default="")
+            if not response:
+                return default
+            return response.strip().lower() in ('y', 'yes')
+        elif HAS_RICH:
             # Add colored question mark prefix
             formatted_prompt = f"[cyan]?[/cyan] {prompt_text}"
             return Confirm.ask(formatted_prompt, default=default)
