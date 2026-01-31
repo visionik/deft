@@ -1814,6 +1814,8 @@ For more information: https://github.com/visionik/deft
     class DeftWizardApp(App):
         """Main TUI application."""
         
+        TITLE = f"Deft v{VERSION}"
+        
         CSS = """
         MenuScreen Container {
             align: center middle;
