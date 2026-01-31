@@ -1038,8 +1038,6 @@ if HAS_TEXTUAL:
         def compose(self) -> ComposeResult:
             yield Header()
             yield Container(
-                Label(f"Deft CLI v{VERSION} - Wizard", id="title"),
-                Label("Select a command:", id="subtitle"),
                 OptionList(
                     Option("Bootstrap - Set up user preferences", id="bootstrap"),
                     Option("Project - Create project configuration", id="project"),
