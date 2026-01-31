@@ -35,6 +35,13 @@ except ImportError:
     except ImportError:
         pass  # Windows: basic input() still works
 
+# Try to import prompt_toolkit
+try:
+    import prompt_toolkit
+    HAS_PROMPT_TOOLKIT = True
+except ImportError:
+    HAS_PROMPT_TOOLKIT = False
+
 # Output helpers
 def print_header(text: str):
     """Print section header"""
@@ -170,7 +177,9 @@ def ask_input(prompt_text: str, default: str = "") -> str:
     """
     try:
         if HAS_RICH:
-            value = Prompt.ask(prompt_text, default=default if default else None)
+            # Add colored question mark prefix
+            formatted_prompt = f"[cyan]?[/cyan] {prompt_text}"
+            value = Prompt.ask(formatted_prompt, default=default if default else None)
             return value if value else default
         else:
             # Fall back to basic input() with readline support (if available on Unix)
@@ -195,7 +204,9 @@ def ask_choice(prompt_text: str, choices: List[str], default: str = None) -> str
     """
     try:
         if HAS_RICH:
-            return Prompt.ask(prompt_text, choices=choices, default=default)
+            # Add colored question mark prefix
+            formatted_prompt = f"[cyan]?[/cyan] {prompt_text}"
+            return Prompt.ask(formatted_prompt, choices=choices, default=default)
         else:
             # Fallback: show numbered list
             print(f"\n{prompt_text}")
@@ -225,7 +236,9 @@ def ask_confirm(prompt_text: str, default: bool = False) -> bool:
     """
     try:
         if HAS_RICH:
-            return Confirm.ask(prompt_text, default=default)
+            # Add colored question mark prefix
+            formatted_prompt = f"[cyan]?[/cyan] {prompt_text}"
+            return Confirm.ask(formatted_prompt, default=default)
         else:
             suffix = " (Y/n) " if default else " (y/N) "
             response = input(f"{prompt_text}{suffix}")
