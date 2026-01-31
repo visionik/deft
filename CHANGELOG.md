@@ -5,7 +5,7 @@ All notable changes to the Deft framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.3.8] - 2026-01-31
+## [0.4.0] - 2026-01-31
 
 ### Added
 - **TUI Wizard Mode**: Full Textual-based interactive wizard interface
@@ -334,7 +334,7 @@ If you have custom scripts or references to deft files, update these paths:
 - Explore new interface guidelines if building CLIs, APIs, or UIs
 - Review enhanced language standards for Python, Go, TypeScript, and C++
 
-[0.3.8]: https://github.com/visionik/deft/releases/tag/v0.3.8
+[0.4.0]: https://github.com/visionik/deft/releases/tag/v0.4.0
 [0.3.7]: https://github.com/visionik/deft/releases/tag/v0.3.7
 [0.3.6]: https://github.com/visionik/deft/releases/tag/v0.3.6
 [0.3.5]: https://github.com/visionik/deft/releases/tag/v0.3.5
