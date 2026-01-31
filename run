@@ -1050,6 +1050,7 @@ if HAS_TEXTUAL:
                     Option("Validate - Check configuration", id="validate"),
                     Option("Doctor - Check system dependencies", id="doctor"),
                     Option("---", id="sep2", disabled=True),
+                    Option("README - View framework documentation", id="readme"),
                     Option("Help - Show help", id="help"),
                     Option("Exit - Quit wizard", id="exit"),
                     id="menu"
@@ -1063,6 +1064,8 @@ if HAS_TEXTUAL:
                 self.app.exit()
             elif option_id == "help":
                 self.app.push_screen("help")
+            elif option_id == "readme":
+                self.app.push_screen("readme")
             elif option_id == "bootstrap":
                 self.app.push_screen("bootstrap")
             elif option_id == "project":
@@ -1321,6 +1324,453 @@ ls secrets/
             else:
                 self.app.pop_screen()  # Return to previous screen
     
+    class SpecScreen(Screen):
+        """Spec generation form."""
+        
+        BINDINGS = [("escape", "cancel", "Cancel")]
+        
+        def __init__(self):
+            super().__init__()
+            self.features = []
+        
+        def compose(self) -> ComposeResult:
+            yield Header()
+            with ScrollableContainer():
+                yield Label("Specification Generator - PRD.md")
+                yield Label("Project name:")
+                yield Input(id="name", placeholder="My Project")
+                yield Label("Brief description (1-2 sentences):")
+                yield Input(id="description", placeholder="What does this project do?")
+                yield Label("Features (one per line):")
+                yield Input(id="feature_input", placeholder="Enter a feature and press Enter")
+                yield Label("", id="feature_list")
+                with Horizontal():
+                    yield Button("Add Feature", id="add_feature")
+                    yield Button("Clear Features", id="clear_features")
+                with Horizontal():
+                    yield Button("Submit", variant="primary", id="submit")
+                    yield Button("Cancel", id="cancel")
+                yield Label("", id="status")
+            yield Footer()
+        
+        def on_button_pressed(self, event: Button.Pressed) -> None:
+            if event.button.id == "cancel":
+                self.app.pop_screen()
+            elif event.button.id == "add_feature":
+                self.add_feature()
+            elif event.button.id == "clear_features":
+                self.features = []
+                self.update_feature_list()
+            elif event.button.id == "submit":
+                self.handle_submit()
+        
+        def on_input_submitted(self, event: Input.Submitted) -> None:
+            if event.input.id == "feature_input":
+                self.add_feature()
+        
+        def add_feature(self) -> None:
+            feature_input = self.query_one("#feature_input", Input)
+            feature = feature_input.value.strip()
+            if feature:
+                self.features.append(feature)
+                feature_input.value = ""
+                self.update_feature_list()
+        
+        def update_feature_list(self) -> None:
+            feature_list = self.query_one("#feature_list", Label)
+            if self.features:
+                text = "\n".join([f"{i+1}. {f}" for i, f in enumerate(self.features)])
+                feature_list.update(f"Features ({len(self.features)}): \n{text}")
+            else:
+                feature_list.update("No features added yet")
+        
+        def action_cancel(self) -> None:
+            self.app.pop_screen()
+        
+        def handle_submit(self) -> None:
+            project_name = self.query_one("#name", Input).value.strip()
+            description = self.query_one("#description", Input).value.strip()
+            
+            if not project_name:
+                self.query_one("#status", Label).update("[red]Error: Project name is required[/red]")
+                return
+            
+            if not description:
+                self.query_one("#status", Label).update("[red]Error: Description is required[/red]")
+                return
+            
+            if not self.features:
+                self.query_one("#status", Label).update("[red]Error: Add at least one feature[/red]")
+                return
+            
+            # Generate PRD
+            feature_list = '\n'.join([f"{i+1}. {f}" for i, f in enumerate(self.features)])
+            script_dir = get_script_dir()
+            template_file = script_dir / "templates" / "make-spec.md"
+            
+            if template_file.exists():
+                template_content = template_file.read_text(encoding='utf-8')
+                template_content = template_content.replace("[project name]", project_name)
+                template_content = template_content.replace(f"I want to build [project name]", f"I want to build {project_name}")
+            else:
+                template_content = "(Template not found)"
+            
+            today = datetime.now().strftime("%Y-%m-%d")
+            prd_file = Path("./PRD.md")
+            prd_content = f"""# Product Requirements Document: {project_name}
+
+**Generated**: {today}
+**Status**: Ready for AI Interview
+
+## Initial Input
+
+**Project Description**: {description}
+
+**I want to build {project_name} that has the following features:**
+{feature_list}
+---
+
+{template_content}
+"""
+            
+            prd_file.write_text(prd_content, encoding='utf-8')
+            self.app.push_screen(SuccessScreen(f"Created PRD.md at {prd_file}"))
+    
+    class InstallScreen(Screen):
+        """Install deft in directory."""
+        
+        BINDINGS = [("escape", "cancel", "Cancel")]
+        
+        def compose(self) -> ComposeResult:
+            yield Header()
+            with ScrollableContainer():
+                yield Label("Install Deft Framework")
+                yield Label("Target directory (default: current):")
+                yield Input(id="directory", placeholder=".", value=".")
+                yield Label("\nThis will create:")
+                yield Label("  • ./deft/ - Framework files")
+                yield Label("  • ./secrets/ - Credentials directory")
+                yield Label("  • ./docs/ - Documentation")
+                yield Label("  • Taskfile.yml - Task automation")
+                yield Label("  • .gitignore - Git configuration")
+                with Horizontal():
+                    yield Button("Install", variant="primary", id="install")
+                    yield Button("Cancel", id="cancel")
+                yield Label("", id="status")
+            yield Footer()
+        
+        def on_button_pressed(self, event: Button.Pressed) -> None:
+            if event.button.id == "cancel":
+                self.app.pop_screen()
+            elif event.button.id == "install":
+                self.handle_install()
+        
+        def action_cancel(self) -> None:
+            self.app.pop_screen()
+        
+        def handle_install(self) -> None:
+            target_dir = Path(self.query_one("#directory", Input).value.strip() or ".")
+            
+            if not target_dir.exists():
+                self.query_one("#status", Label).update(f"[red]Error: Directory does not exist: {target_dir}[/red]")
+                return
+            
+            original_dir = Path.cwd()
+            try:
+                os.chdir(target_dir)
+                deft_dir = Path("./deft")
+                
+                if deft_dir.exists():
+                    self.query_one("#status", Label).update("[yellow]Deft already installed. Reinstalling...[/yellow]")
+                    shutil.rmtree(deft_dir)
+                
+                script_dir = get_script_dir()
+                shutil.copytree(script_dir, deft_dir)
+                
+                Path("secrets").mkdir(exist_ok=True)
+                Path("docs").mkdir(exist_ok=True)
+                Path("secrets/.gitkeep").touch()
+                
+                gitignore = Path(".gitignore")
+                if not gitignore.exists():
+                    gitignore.write_text("secrets/*\n!secrets/.gitkeep\n!secrets/*.example\n", encoding='utf-8')
+                
+                self.app.push_screen(SuccessScreen(f"Installed deft in {target_dir.absolute()}", offer_next="project"))
+            except Exception as e:
+                self.query_one("#status", Label).update(f"[red]Error: {e}[/red]")
+            finally:
+                os.chdir(original_dir)
+    
+    class ResetScreen(Screen):
+        """Reset configuration files."""
+        
+        BINDINGS = [("escape", "cancel", "Cancel")]
+        
+        def compose(self) -> ComposeResult:
+            yield Header()
+            with ScrollableContainer():
+                yield Label("Reset Configuration Files")
+                yield Label("\nSelect files to reset/delete:")
+                
+                # Check which files exist
+                script_dir = get_script_dir()
+                user_file = script_dir / "core" / "user.md"
+                project_file = Path("./deft/core/project.md")
+                prd_file = Path("./PRD.md")
+                spec_file = Path("./SPECIFICATION.md")
+                
+                if user_file.exists():
+                    yield Label(f"[cyan]✓[/cyan] user.md (will reset to default)", id="user_exists")
+                else:
+                    yield Label("[dim]user.md (not found)[/dim]", id="user_missing")
+                
+                if project_file.exists():
+                    yield Label(f"[cyan]✓[/cyan] project.md (will delete)", id="project_exists")
+                else:
+                    yield Label("[dim]project.md (not found)[/dim]", id="project_missing")
+                
+                if prd_file.exists():
+                    yield Label(f"[cyan]✓[/cyan] PRD.md (will delete)", id="prd_exists")
+                else:
+                    yield Label("[dim]PRD.md (not found)[/dim]", id="prd_missing")
+                
+                if spec_file.exists():
+                    yield Label(f"[cyan]✓[/cyan] SPECIFICATION.md (will delete)", id="spec_exists")
+                else:
+                    yield Label("[dim]SPECIFICATION.md (not found)[/dim]", id="spec_missing")
+                
+                yield Label("\n[yellow]Warning: This action cannot be undone![/yellow]")
+                
+                with Horizontal():
+                    yield Button("Reset All", variant="error", id="reset")
+                    yield Button("Cancel", id="cancel")
+                yield Label("", id="status")
+            yield Footer()
+        
+        def on_button_pressed(self, event: Button.Pressed) -> None:
+            if event.button.id == "cancel":
+                self.app.pop_screen()
+            elif event.button.id == "reset":
+                self.handle_reset()
+        
+        def action_cancel(self) -> None:
+            self.app.pop_screen()
+        
+        def handle_reset(self) -> None:
+            script_dir = get_script_dir()
+            user_file = script_dir / "core" / "user.md"
+            project_file = Path("./deft/core/project.md")
+            prd_file = Path("./PRD.md")
+            spec_file = Path("./SPECIFICATION.md")
+            
+            reset_count = 0
+            
+            if user_file.exists():
+                default_content = """# User Preferences
+
+Legend (from RFC2119): !=MUST, ~=SHOULD, ≉=SHOULD NOT, ⊗=MUST NOT, ?=MAY.
+
+**Rule Precedence**: This file has HIGHEST precedence - overrides all other deft rules.
+
+## Name
+
+Address the user as: **(Your Name)**
+
+## Default Standards
+
+**Coverage**: ! ≥85% test coverage for all projects (unless project.md specifies otherwise)
+
+**Primary Languages**:
+- (Add your languages here)
+
+## Custom Rules
+
+No custom rules defined yet.
+
+## Workflow Preferences
+
+- ~ Use task-based automation (Taskfile)
+- ! Always run `task check` before committing
+- ~ Follow Conventional Commits
+
+## AI Behavior
+
+- ~ Be direct and concise
+- ~ Proactively suggest improvements
+- ! Explain tradeoffs for major decisions
+
+---
+
+**Note**: You can edit this file anytime to update your preferences.
+**See**: [../main.md](../main.md) for framework overview.
+"""
+                user_file.write_text(default_content, encoding='utf-8')
+                reset_count += 1
+            
+            for file in [project_file, prd_file, spec_file]:
+                if file.exists():
+                    file.unlink()
+                    reset_count += 1
+            
+            if reset_count > 0:
+                self.app.push_screen(SuccessScreen(f"Reset {reset_count} file(s)"))
+            else:
+                self.query_one("#status", Label).update("[yellow]No files to reset[/yellow]")
+    
+    class ValidateScreen(Screen):
+        """Validate deft configuration."""
+        
+        BINDINGS = [("escape", "back", "Back")]
+        
+        def compose(self) -> ComposeResult:
+            yield Header()
+            with ScrollableContainer():
+                yield Label("Deft Configuration Validation")
+                yield Static("", id="results")
+                yield Button("Back to Menu", variant="primary", id="back")
+            yield Footer()
+        
+        def on_mount(self) -> None:
+            self.run_validation()
+        
+        def run_validation(self) -> None:
+            results = ["Running validation...\n"]
+            script_dir = get_script_dir()
+            errors = 0
+            
+            # Check required files
+            required_files = [
+                "main.md",
+                "core/user.md",
+                "coding/coding.md",
+                "REFERENCES.md"
+            ]
+            
+            for file in required_files:
+                filepath = script_dir / file
+                if filepath.exists():
+                    results.append(f"[green]✓[/green] Found: {file}")
+                else:
+                    results.append(f"[red]✗[/red] Missing: {file}")
+                    errors += 1
+            
+            # Check language files
+            lang_dir = script_dir / "languages"
+            if lang_dir.exists() and list(lang_dir.glob("*.md")):
+                results.append(f"[green]✓[/green] Language files present")
+            else:
+                results.append(f"[red]✗[/red] No language files found")
+                errors += 1
+            
+            results.append("")
+            if errors == 0:
+                results.append("[green]✓ Validation passed![/green]")
+            else:
+                results.append(f"[red]✗ Validation failed with {errors} error(s)[/red]")
+            
+            self.query_one("#results", Static).update("\n".join(results))
+        
+        def on_button_pressed(self, event: Button.Pressed) -> None:
+            self.app.pop_screen()
+        
+        def action_back(self) -> None:
+            self.app.pop_screen()
+    
+    class DoctorScreen(Screen):
+        """Check system dependencies."""
+        
+        BINDINGS = [("escape", "back", "Back")]
+        
+        def compose(self) -> ComposeResult:
+            yield Header()
+            with ScrollableContainer():
+                yield Label("Deft Doctor - System Check")
+                yield Static("", id="results")
+                yield Button("Back to Menu", variant="primary", id="back")
+            yield Footer()
+        
+        def on_mount(self) -> None:
+            self.run_checks()
+        
+        def run_checks(self) -> None:
+            results = ["Checking system...\n"]
+            warnings = 0
+            
+            # Check commands
+            commands = [
+                ("task", "Task (Taskfile)", False),
+                ("git", "Git", True),
+                ("python3", "Python 3", False),
+                ("go", "Go", False),
+                ("node", "Node.js", False),
+            ]
+            
+            for cmd, name, required in commands:
+                if shutil.which(cmd):
+                    results.append(f"[green]✓[/green] {name} is installed")
+                else:
+                    if required:
+                        results.append(f"[red]✗[/red] {name} not found - required")
+                    else:
+                        results.append(f"[yellow]⚠[/yellow] {name} not found")
+                        warnings += 1
+            
+            # Check directory structure
+            results.append("\nChecking Deft structure...")
+            script_dir = get_script_dir()
+            expected_dirs = ["core", "languages", "interfaces", "tools", "swarm", "templates", "meta"]
+            
+            for dir_name in expected_dirs:
+                dir_path = script_dir / dir_name
+                if dir_path.is_dir():
+                    results.append(f"[green]✓[/green] Directory: {dir_name}/")
+                else:
+                    results.append(f"[yellow]⚠[/yellow] Missing: {dir_name}/")
+                    warnings += 1
+            
+            results.append("")
+            if warnings == 0:
+                results.append("[green]✓ System check passed![/green]")
+            else:
+                results.append(f"[yellow]⚠ System check completed with {warnings} warning(s)[/yellow]")
+            
+            self.query_one("#results", Static).update("\n".join(results))
+        
+        def on_button_pressed(self, event: Button.Pressed) -> None:
+            self.app.pop_screen()
+        
+        def action_back(self) -> None:
+            self.app.pop_screen()
+    
+    class ReadmeScreen(Screen):
+        """View README.md."""
+        
+        BINDINGS = [("escape", "back", "Back")]
+        
+        def compose(self) -> ComposeResult:
+            yield Header()
+            with ScrollableContainer():
+                yield Static("", id="readme_content")
+                yield Button("Back to Menu", variant="primary", id="back")
+            yield Footer()
+        
+        def on_mount(self) -> None:
+            self.load_readme()
+        
+        def load_readme(self) -> None:
+            readme_file = get_script_dir() / "README.md"
+            if readme_file.exists():
+                content = readme_file.read_text(encoding='utf-8')
+                self.query_one("#readme_content", Static).update(content)
+            else:
+                self.query_one("#readme_content", Static).update("[red]README.md not found[/red]")
+        
+        def on_button_pressed(self, event: Button.Pressed) -> None:
+            self.app.pop_screen()
+        
+        def action_back(self) -> None:
+            self.app.pop_screen()
+    
     class HelpScreen(Screen):
         """Help screen showing usage information."""
         
@@ -1412,6 +1862,12 @@ For more information: https://github.com/visionik/deft
             "menu": MenuScreen,
             "bootstrap": BootstrapScreen,
             "project": ProjectScreen,
+            "spec": SpecScreen,
+            "install": InstallScreen,
+            "reset": ResetScreen,
+            "validate": ValidateScreen,
+            "doctor": DoctorScreen,
+            "readme": ReadmeScreen,
             "help": HelpScreen,
         }
         
