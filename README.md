@@ -244,9 +244,9 @@ Rules cascade with precedence:
 The deft process evolves over time:
 
 ```mermaid
-flowchart LR
+flowchart TB
     subgraph Evolution ["📈 Continuous Improvement"]
-        direction LR
+        direction TB
         DEV["🔨 Development"] --> LEARN["💡 Learn Patterns"]
         LEARN --> META["📝 Update Meta Files"]
         META --> REFINE["⚙️ Refine Standards"]
@@ -296,9 +296,9 @@ task dev           # Start dev environment
 Deft embraces TDD as the default development approach:
 
 ```mermaid
-flowchart LR
+flowchart TB
     subgraph TDD ["TDD Cycle"]
-        direction LR
+        direction TB
         W["✍️ Write Test"] --> F["❌ Watch Fail"]
         F --> I["💻 Implement"]
         I --> G["✅ Green"]
@@ -347,9 +347,9 @@ task check         # Pre-commit: all quality checks including tests
 Before writing any code, deft uses an AI-assisted specification process:
 
 ```mermaid
-flowchart LR
+flowchart TB
     subgraph SDD ["Spec-Driven Development Flow"]
-        direction LR
+        direction TB
         IDEA["💡 Idea"] --> SPEC["📝 make-spec.md"]
         SPEC --> QA["❓ AI Interview"]
         QA --> DOC["📋 SPECIFICATION.md"]
