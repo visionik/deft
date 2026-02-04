@@ -66,20 +66,23 @@ Deft uses a layered architecture where more specific rules override general ones
 
 ```mermaid
 flowchart TB
-    subgraph Precedence ["Rule Precedence (High → Low)"]
-        U["🧑 user.md\nPersonal preferences"] --> P["📁 project.md\nProject rules"]
-        P --> L["🐍 python.md / go.md\nLanguage standards"]
-        L --> T["🔧 taskfile.md\nTool guidelines"]
-        T --> M["📖 main.md\nGeneral AI guidelines"]
-        M --> S["📋 specification.md\nProject requirements"]
+    subgraph precedence ["Rule Precedence (top = highest)"]
+        U["👤 user.md<br/><i>Personal preferences</i>"]
+        P["📁 project.md<br/><i>Project-specific rules</i>"]
+        L["🐍 python.md / go.md / etc.<br/><i>Language standards</i>"]
+        T["🔧 taskfile.md<br/><i>Tool guidelines</i>"]
+        M["🤖 main.md<br/><i>General AI behavior</i>"]
+        S["📋 specification.md<br/><i>Project requirements</i>"]
     end
-    
-    style U fill:#4ade80,stroke:#166534
-    style P fill:#60a5fa,stroke:#1e40af
-    style L fill:#f472b6,stroke:#9d174d
-    style T fill:#fbbf24,stroke:#b45309
-    style M fill:#a78bfa,stroke:#5b21b6
-    style S fill:#94a3b8,stroke:#475569
+
+    U --> P --> L --> T --> M --> S
+
+    style U fill:#4ade80,stroke:#166534,color:#000
+    style P fill:#60a5fa,stroke:#1e40af,color:#000
+    style L fill:#facc15,stroke:#a16207,color:#000
+    style T fill:#fb923c,stroke:#c2410c,color:#000
+    style M fill:#c084fc,stroke:#7c3aed,color:#000
+    style S fill:#94a3b8,stroke:#475569,color:#000
 ```
 
 ### 📁 Directory Structure
@@ -244,23 +247,31 @@ Rules cascade with precedence:
 The deft process evolves over time:
 
 ```mermaid
-flowchart TB
-    subgraph Evolution ["📈 Continuous Improvement"]
-        direction TB
-        DEV["🔨 Development"] --> LEARN["💡 Learn Patterns"]
-        LEARN --> META["📝 Update Meta Files"]
-        META --> REFINE["⚙️ Refine Standards"]
-        REFINE --> DEV
+flowchart TD
+    subgraph evolution ["Continuous Evolution"]
+        DEV["🛠️ Development<br/><i>Daily coding</i>"]
+        LEARN["📚 lessons.md<br/><i>Patterns discovered</i>"]
+        IDEAS["💡 ideas.md<br/><i>Future directions</i>"]
+        SUGGEST["📝 suggestions.md<br/><i>Improvements</i>"]
+        USER["👤 user.md<br/><i>Preferences</i>"]
+        STANDARDS["📖 Language/Tool files<br/><i>Evolving standards</i>"]
     end
-    
-    META --> L["lessons.md"]
-    META --> I["ideas.md"]
-    META --> S["suggestions.md"]
-    
-    style DEV fill:#dbeafe,stroke:#2563eb
-    style LEARN fill:#fef3c7,stroke:#d97706
-    style META fill:#e0e7ff,stroke:#4f46e5
-    style REFINE fill:#d1fae5,stroke:#059669
+
+    DEV -->|"AI discovers"| LEARN
+    DEV -->|"AI notes"| IDEAS
+    DEV -->|"AI suggests"| SUGGEST
+    LEARN -->|"Promote"| STANDARDS
+    IDEAS -->|"Review"| STANDARDS
+    SUGGEST -->|"Accept"| USER
+    STANDARDS -->|"Inform"| DEV
+    USER -->|"Guide"| DEV
+
+    style DEV fill:#f0abfc,stroke:#a855f7,color:#000
+    style LEARN fill:#fde68a,stroke:#d97706,color:#000
+    style IDEAS fill:#a5f3fc,stroke:#06b6d4,color:#000
+    style SUGGEST fill:#fecaca,stroke:#ef4444,color:#000
+    style USER fill:#86efac,stroke:#22c55e,color:#000
+    style STANDARDS fill:#c7d2fe,stroke:#6366f1,color:#000
 ```
 
 - AI updates `lessons.md` when learning better patterns
@@ -296,21 +307,20 @@ task dev           # Start dev environment
 Deft embraces TDD as the default development approach:
 
 ```mermaid
-flowchart TB
-    subgraph TDD ["TDD Cycle"]
-        direction TB
-        W["✍️ Write Test"] --> F["❌ Watch Fail"]
-        F --> I["💻 Implement"]
-        I --> G["✅ Green"]
-        G --> R["♻️ Refactor"]
-        R --> W
+flowchart LR
+    subgraph cycle ["TDD Cycle"]
+        R["🔴 RED<br/>Write failing test"]
+        G["🟢 GREEN<br/>Make it pass"]
+        B["🔵 REFACTOR<br/>Improve code"]
     end
-    
-    style W fill:#fef3c7,stroke:#d97706
-    style F fill:#fecaca,stroke:#dc2626
-    style I fill:#e0e7ff,stroke:#4f46e5
-    style G fill:#bbf7d0,stroke:#16a34a
-    style R fill:#ddd6fe,stroke:#7c3aed
+
+    R -->|"Minimal code"| G
+    G -->|"Clean up"| B
+    B -->|"Next feature"| R
+
+    style R fill:#fca5a5,stroke:#dc2626,color:#000
+    style G fill:#86efac,stroke:#16a34a,color:#000
+    style B fill:#93c5fd,stroke:#2563eb,color:#000
 ```
 
 1. **Write the test first**: Define expected behavior before implementation
@@ -347,20 +357,22 @@ task check         # Pre-commit: all quality checks including tests
 Before writing any code, deft uses an AI-assisted specification process:
 
 ```mermaid
-flowchart TB
-    subgraph SDD ["Spec-Driven Development Flow"]
-        direction TB
-        IDEA["💡 Idea"] --> SPEC["📝 make-spec.md"]
-        SPEC --> QA["❓ AI Interview"]
-        QA --> DOC["📋 SPECIFICATION.md"]
-        DOC --> BUILD["🔨 Multi-Agent Build"]
+flowchart LR
+    subgraph sdd ["Spec-Driven Development"]
+        I["💡 Idea<br/><i>Initial concept</i>"]
+        Q["❓ Interview<br/><i>AI asks questions</i>"]
+        S["📋 SPECIFICATION.md<br/><i>Complete plan</i>"]
+        D["👥 Development<br/><i>Parallel agents</i>"]
     end
-    
-    style IDEA fill:#fef3c7,stroke:#d97706
-    style SPEC fill:#e0e7ff,stroke:#4f46e5
-    style QA fill:#fce7f3,stroke:#be185d
-    style DOC fill:#d1fae5,stroke:#059669
-    style BUILD fill:#dbeafe,stroke:#2563eb
+
+    I -->|"make-spec.md"| Q
+    Q -->|"Clarify ambiguity"| S
+    S -->|"Independent tasks"| D
+
+    style I fill:#fef08a,stroke:#ca8a04,color:#000
+    style Q fill:#c4b5fd,stroke:#7c3aed,color:#000
+    style S fill:#6ee7b7,stroke:#059669,color:#000
+    style D fill:#7dd3fc,stroke:#0284c7,color:#000
 ```
 
 **The Process:**
@@ -447,6 +459,21 @@ flowchart TB
 
 ### Starting a New Python Project
 
+```mermaid
+sequenceDiagram
+    participant AI
+    participant Files as Deft Files
+    participant Project
+
+    AI->>Files: Read main.md
+    AI->>Files: Read python.md
+    AI->>Files: Read taskfile.md
+    AI->>Project: Setup pytest, ruff, black, mypy
+    AI->>Project: Configure ≥85% coverage
+    AI->>Project: Create Taskfile.yml
+    Note over AI,Project: You customize project.md
+```
+
 1. AI reads: `main.md` → `python.md` → `taskfile.md`
 2. AI sets up: pytest, ruff, black, mypy, Taskfile
 3. AI configures: ≥85% coverage, PEP standards
@@ -454,12 +481,41 @@ flowchart TB
 
 ### Working on an Existing Go Project
 
+```mermaid
+sequenceDiagram
+    participant AI
+    participant Files as Deft Files
+    participant Code
+
+    AI->>Files: Read user.md (your overrides)
+    AI->>Files: Read project.md
+    AI->>Files: Read go.md
+    AI->>Files: Read main.md
+    AI->>Code: Run task check
+    AI->>Code: Apply changes
+    Note over AI,Code: Respects your user.md preferences
+```
+
 1. AI reads: `user.md` → `project.md` → `go.md` → `main.md`
 2. AI follows: go.dev/doc/comment, Testify patterns
 3. AI runs: `task check` before suggesting changes
 4. AI respects: your user.md overrides
 
 ### Code Review Session
+
+```mermaid
+sequenceDiagram
+    participant AI
+    participant Standards as Language File
+    participant Tasks as Taskfile
+    participant Meta as suggestions.md
+
+    AI->>Standards: Reference quality standards
+    AI->>Tasks: Run task quality
+    AI->>Tasks: Run task test:coverage
+    AI->>AI: Check Conventional Commits
+    AI->>Meta: Log improvements
+```
 
 1. AI references quality standards from language file
 2. AI runs `task quality` and `task test:coverage`
